@@ -1,0 +1,23 @@
+/*
+ * Density axis — [data-density] on <html>: comfortable (default) | compact.
+ * Only spacing and control geometry change; colours and type families do not.
+ */
+
+:root,
+[data-density='comfortable'] {
+	--space-unit: 0.25rem; /* 4px */
+	--control-h-sm: 1.75rem; /* 28px */
+	--control-h-md: 2.25rem; /* 36px */
+	--control-h-lg: 2.75rem; /* 44px */
+	--row-h: 2.75rem; /* table / list rows */
+	--input-py: var(--space-2);
+}
+
+[data-density='compact'] {
+	--space-unit: 0.1875rem; /* 3px */
+	--control-h-sm: 1.5rem; /* 24px */
+	--control-h-md: 1.875rem; /* 30px */
+	--control-h-lg: 2.25rem; /* 36px */
+	--row-h: 2rem;
+	--input-py: var(--space-1);
+}

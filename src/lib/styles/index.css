@@ -1,0 +1,9 @@
+/*
+ * @ethan/designbook — global styles.
+ * Import ONCE in your root layout:  import '@ethan/designbook/styles';
+ * Fonts are separate so you can opt out:  import '@ethan/designbook/fonts';
+ */
+@import '../tokens/index.css';
+@import './reset.css';
+@import './typography.css';
+@import './utilities.css';

@@ -1,0 +1,141 @@
+/*
+ * Primitive tokens — raw values shared by every theme.
+ * Components never reference these directly; they use semantic tokens (semantic.css).
+ *
+ * Colour ramps follow a 12-step convention (borrowed from Radix):
+ *   1  app background          7  hover border
+ *   2  subtle background       8  strong border / focus ring base
+ *   3  component background    9  solid fill
+ *   4  component hover         10 solid fill hover
+ *   5  component active        11 low-contrast text
+ *   6  subtle border           12 high-contrast text
+ * Each theme supplies its own neutral (--n-*) and accent (--a-*) ramps in themes/*.css.
+ * Status ramps below are shared, but a theme may override them.
+ */
+
+:root {
+	/* ---- Spacing base (density.css sets --space-unit) ---- */
+	--space-0: 0;
+	--space-px: 1px;
+	--space-0-5: calc(var(--space-unit) * 0.5);
+	--space-1: calc(var(--space-unit) * 1);
+	--space-1-5: calc(var(--space-unit) * 1.5);
+	--space-2: calc(var(--space-unit) * 2);
+	--space-2-5: calc(var(--space-unit) * 2.5);
+	--space-3: calc(var(--space-unit) * 3);
+	--space-4: calc(var(--space-unit) * 4);
+	--space-5: calc(var(--space-unit) * 5);
+	--space-6: calc(var(--space-unit) * 6);
+	--space-8: calc(var(--space-unit) * 8);
+	--space-10: calc(var(--space-unit) * 10);
+	--space-12: calc(var(--space-unit) * 12);
+	--space-16: calc(var(--space-unit) * 16);
+	--space-20: calc(var(--space-unit) * 20);
+	--space-24: calc(var(--space-unit) * 24);
+	--space-32: calc(var(--space-unit) * 32);
+
+	/* ---- Type scale (rem). Themes may override --text-base-size. ---- */
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-md: 1rem;
+	--text-lg: 1.125rem;
+	--text-xl: 1.25rem;
+	--text-2xl: 1.5rem;
+	--text-3xl: 1.875rem;
+	--text-4xl: 2.25rem;
+	--text-5xl: 3rem;
+	--text-6xl: 3.75rem;
+
+	--leading-none: 1;
+	--leading-tight: 1.2;
+	--leading-snug: 1.35;
+	--leading-normal: 1.5;
+	--leading-relaxed: 1.65;
+
+	--tracking-tight: -0.02em;
+	--tracking-normal: 0;
+	--tracking-wide: 0.04em;
+
+	--weight-regular: 400;
+	--weight-medium: 500;
+	--weight-semibold: 600;
+	--weight-bold: 700;
+
+	/* ---- Radii (themes override) ---- */
+	--radius-xs: 2px;
+	--radius-sm: 4px;
+	--radius-md: 6px;
+	--radius-lg: 10px;
+	--radius-xl: 16px;
+	--radius-full: 9999px;
+
+	/* ---- Z-index scale ---- */
+	--z-base: 0;
+	--z-raised: 10;
+	--z-sticky: 100;
+	--z-overlay: 1000;
+	--z-modal: 1100;
+	--z-popover: 1200;
+	--z-toast: 1300;
+	--z-tooltip: 1400;
+
+	/* ---- Layout ---- */
+	--container-sm: 40rem;
+	--container-md: 48rem;
+	--container-lg: 64rem;
+	--container-xl: 80rem;
+
+	/* ---- Status ramps. scheme.css maps --x-N to the -light or -dark value. ---- */
+
+	--success-3-light: oklch(96% 0.04 150);
+	--success-6-light: oklch(85% 0.09 150);
+	--success-9-light: oklch(51% 0.15 150);
+	--success-10-light: oklch(46% 0.15 150);
+	--success-11-light: oklch(42% 0.14 150);
+	--success-3-dark: oklch(24% 0.04 150);
+	--success-6-dark: oklch(34% 0.08 150);
+	--success-9-dark: oklch(66% 0.17 150);
+	--success-10-dark: oklch(72% 0.17 150);
+	--success-11-dark: oklch(80% 0.15 150);
+
+	--warning-3-light: oklch(97% 0.05 80);
+	--warning-6-light: oklch(87% 0.12 80);
+	--warning-9-light: oklch(76% 0.17 75);
+	--warning-10-light: oklch(70% 0.17 75);
+	--warning-11-light: oklch(48% 0.13 70);
+	--warning-3-dark: oklch(24% 0.04 80);
+	--warning-6-dark: oklch(36% 0.09 80);
+	--warning-9-dark: oklch(78% 0.16 80);
+	--warning-10-dark: oklch(84% 0.15 80);
+	--warning-11-dark: oklch(86% 0.13 85);
+
+	--danger-3-light: oklch(96% 0.03 25);
+	--danger-6-light: oklch(85% 0.09 25);
+	--danger-9-light: oklch(56% 0.21 25);
+	--danger-10-light: oklch(51% 0.21 25);
+	--danger-11-light: oklch(46% 0.19 25);
+	--danger-3-dark: oklch(24% 0.05 25);
+	--danger-6-dark: oklch(36% 0.11 25);
+	--danger-9-dark: oklch(64% 0.2 25);
+	--danger-10-dark: oklch(70% 0.19 25);
+	--danger-11-dark: oklch(80% 0.14 25);
+
+	--info-3-light: oklch(96% 0.03 240);
+	--info-6-light: oklch(85% 0.08 240);
+	--info-9-light: oklch(53% 0.16 240);
+	--info-10-light: oklch(48% 0.16 240);
+	--info-11-light: oklch(44% 0.14 240);
+	--info-3-dark: oklch(24% 0.04 240);
+	--info-6-dark: oklch(36% 0.08 240);
+	--info-9-dark: oklch(68% 0.15 240);
+	--info-10-dark: oklch(74% 0.14 240);
+	--info-11-dark: oklch(82% 0.11 240);
+
+	/* Text on solid status fills: white in light, near-black in dark (bright fills need dark text). */
+	--status-contrast-light: var(--white);
+	--status-contrast-dark: oklch(15% 0.01 250);
+
+	/* Pure references */
+	--white: oklch(100% 0 0);
+	--black: oklch(0% 0 0);
+}

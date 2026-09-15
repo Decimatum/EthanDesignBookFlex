@@ -1,0 +1,115 @@
+/*
+ * Semantic tokens — the ONLY tokens components may reference.
+ * They map meaning → ramp step. The mapping is identical in light and dark;
+ * the theme files swap the ramps underneath, so this file never needs a dark block.
+ * Repeated on [data-theme] elements so nested themes resolve against their own ramps.
+ */
+
+:root,
+[data-theme] {
+	/* ---- Surfaces ---- */
+	--color-bg: var(--n-1);
+	--color-bg-subtle: var(--n-2);
+	--color-surface: var(--n-1);
+	--color-surface-raised: var(--n-2);
+	--color-surface-overlay: var(--n-1);
+	--color-component: var(--n-3);
+	--color-component-hover: var(--n-4);
+	--color-component-active: var(--n-5);
+
+	/* ---- Borders ---- */
+	--color-border: var(--n-6);
+	--color-border-hover: var(--n-7);
+	--color-border-strong: var(--n-8);
+
+	/* ---- Text ---- */
+	--color-text: var(--n-12);
+	--color-text-muted: var(--n-11);
+	--color-text-subtle: var(--n-10);
+	--color-text-disabled: var(--n-8);
+	--color-text-inverse: var(--n-1);
+
+	/* ---- Solid neutral (e.g. neutral buttons) ---- */
+	--color-neutral: var(--n-12);
+	--color-neutral-hover: var(--n-11);
+	--color-neutral-fg: var(--n-1);
+
+	/* ---- Accent ---- */
+	--color-accent: var(--a-9);
+	--color-accent-hover: var(--a-10);
+	--color-accent-active: var(--a-11);
+	--color-accent-fg: var(--a-contrast);
+	--color-accent-subtle: var(--a-3);
+	--color-accent-subtle-hover: var(--a-4);
+	--color-accent-subtle-active: var(--a-5);
+	--color-accent-border: var(--a-7);
+	--color-accent-text: var(--a-11);
+
+	/* ---- Status ---- */
+	--color-success: var(--success-9);
+	--color-success-hover: var(--success-10);
+	--color-success-fg: var(--status-contrast);
+	--color-success-subtle: var(--success-3);
+	--color-success-border: var(--success-6);
+	--color-success-text: var(--success-11);
+
+	--color-warning: var(--warning-9);
+	--color-warning-hover: var(--warning-10);
+	--color-warning-fg: var(--black);
+	--color-warning-subtle: var(--warning-3);
+	--color-warning-border: var(--warning-6);
+	--color-warning-text: var(--warning-11);
+
+	--color-danger: var(--danger-9);
+	--color-danger-hover: var(--danger-10);
+	--color-danger-fg: var(--status-contrast);
+	--color-danger-subtle: var(--danger-3);
+	--color-danger-border: var(--danger-6);
+	--color-danger-text: var(--danger-11);
+
+	--color-info: var(--info-9);
+	--color-info-hover: var(--info-10);
+	--color-info-fg: var(--status-contrast);
+	--color-info-subtle: var(--info-3);
+	--color-info-border: var(--info-6);
+	--color-info-text: var(--info-11);
+
+	/* Financial deltas — default to success/danger, themes may override */
+	--color-positive: var(--success-9);
+	--color-positive-text: var(--success-11);
+	--color-negative: var(--danger-9);
+	--color-negative-text: var(--danger-11);
+
+	/* ---- Focus ---- */
+	--color-focus: var(--a-8);
+	--focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-focus);
+	--focus-ring-inset: inset 0 0 0 2px var(--color-focus);
+
+	/* ---- Selection / scrollbars ---- */
+	--color-selection: var(--a-5);
+
+	/* ---- Typography (themes set --font-display/body/mono) ---- */
+	--font-numeric: tabular-nums;
+
+	/* ---- Elevation (themes override to taste) ---- */
+	--shadow-xs: 0 1px 2px oklch(0% 0 0 / 0.06);
+	--shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.08), 0 1px 2px oklch(0% 0 0 / 0.05);
+	--shadow-md: 0 4px 12px oklch(0% 0 0 / 0.1), 0 2px 4px oklch(0% 0 0 / 0.06);
+	--shadow-lg: 0 12px 32px oklch(0% 0 0 / 0.14), 0 4px 8px oklch(0% 0 0 / 0.06);
+	--shadow-overlay: var(--shadow-lg);
+
+	/* ---- Control geometry (density.css sets --control-h-*) ---- */
+	--control-radius: var(--radius-md);
+	--control-border-width: 1px;
+	--control-px-sm: var(--space-2-5);
+	--control-px-md: var(--space-3);
+	--control-px-lg: var(--space-4);
+	--control-gap: var(--space-2);
+	--control-text-sm: var(--text-sm);
+	--control-text-md: var(--text-sm);
+	--control-text-lg: var(--text-md);
+
+	/* ---- Layout ---- */
+	--page-px: var(--space-6);
+	--page-max: var(--container-xl);
+}

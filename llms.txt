@@ -1,0 +1,42 @@
+# @ethan/designbook
+
+> Design Book — a themeable Svelte 5 UI framework and component library.
+
+Svelte 5 component library with three themes (slate, folio, terminal), light/dark schemes and two densities, all driven by CSS custom properties. Components reference semantic tokens only.
+
+## Start here
+
+- [CLAUDE.md](CLAUDE.md): conventions, token rules, definition of done
+- [PLAN.md](PLAN.md): architecture and roadmap
+- [Tokens](src/lib/tokens/semantic.css): every semantic token a component may use
+- [Theme controller](src/lib/theme/theme.svelte.ts): theme / scheme / density API
+- [Registry](registry.json): machine-readable component manifest
+
+## Components
+
+- [Avatar](src/lib/components/avatar/README.md): Image or initials for a person or entity. Falls back to initials automatically when there is no image or it fails to load, with a stable per-name background hue.
+- [Badge](src/lib/components/badge/README.md): Small status label. Three variants and six tones cover statuses, counts and categories; a `dot` adds a status indicator.
+- [Button](src/lib/components/button/README.md): The primary action control. Renders a `<button>` by default, or an `<a>` when `href` is given, with identical styling in both cases. Five visual variants × three tones × three sizes cover every button in a typical app without custom CSS.
+- [Card](src/lib/components/card/README.md): A surface that groups related content. Three variants (outlined, elevated, filled), optional header and footer rows, and an interactive mode for clickable cards.
+- [Checkbox](src/lib/components/checkbox/README.md): A native checkbox with a custom box. Supports an indeterminate state for "select all" and an optional description line.
+- [Container](src/lib/components/container/README.md): Centres content with a max width from the `--container-*` scale and page-level horizontal padding.
+- [Divider](src/lib/components/divider/README.md): A hairline separator, horizontal or vertical, with an optional centred label.
+- [Field](src/lib/components/field/README.md): Wraps a form control with a label, optional hint and error message, and wires the accessibility attributes for you: the label's `for`, the control's `aria-describedby`, `aria-invalid`, `required` and `disabled` all flow through context.
+- [Grid](src/lib/components/grid/README.md): CSS grid with two modes: a fixed column count, or responsive auto-fit columns with a minimum width. Both keep a token-driven gap.
+- [Heading](src/lib/components/heading/README.md): Semantic heading (h1–h6) in the theme's display face. Visual size is decoupled from the level so document outlines stay correct while the design does what it needs.
+- [Inline](src/lib/components/inline/README.md): Horizontal flex layout that wraps by default. Use for button rows, tag clouds, toolbars and metadata lines.
+- [Input](src/lib/components/input/README.md): Single-line text input with optional leading/trailing adornments. Reads label, hint, error, required and disabled from a surrounding Field.
+- [Radio & RadioGroup](src/lib/components/radio/README.md): Single choice from a small set. `RadioGroup` owns the value, name, label, hint and error; `Radio` renders one option and reads the group through context.
+- [Skeleton](src/lib/components/skeleton/README.md): Loading placeholder that mirrors the shape of the content it stands in for. Hidden from assistive technology; announce loading with `aria-busy` on the region instead.
+- [Spinner](src/lib/components/spinner/README.md): Indeterminate loading indicator. Inherits `currentColor` and scales with font size, so it drops into buttons, inputs and text without configuration.
+- [Stack](src/lib/components/stack/README.md): Vertical flex layout with a token-driven gap. The default way to space things top-to-bottom; reach for it before writing `margin`.
+- [Switch](src/lib/components/switch/README.md): An on/off toggle for settings that take effect immediately. Use a Checkbox instead when the choice is submitted with a form.
+- [Text](src/lib/components/text/README.md): Body text with size, weight and tone from tokens. Also handles the recurring needs of application text: tabular numerals, truncation and line clamping.
+- [Textarea](src/lib/components/textarea/README.md): Multi-line text input. Optional auto-resize grows with content instead of scrolling.
+
+## Usage
+
+```svelte
+import '@ethan/designbook/styles';
+import { Button, theme } from '@ethan/designbook';
+```

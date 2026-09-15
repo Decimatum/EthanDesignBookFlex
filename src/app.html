@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-theme="slate" data-scheme="auto" data-density="comfortable">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			// Restore the visitor's theme/scheme/density before first paint to avoid a flash.
+			// Mirrors src/lib/theme/theme.svelte.ts (same storage key + defaults).
+			(function () {
+				try {
+					var s = JSON.parse(localStorage.getItem('designbook:theme') || '{}');
+					var d = document.documentElement;
+					if (s.theme) d.dataset.theme = s.theme;
+					if (s.scheme) d.dataset.scheme = s.scheme;
+					if (s.density) d.dataset.density = s.density;
+				} catch (e) {}
+			})();
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

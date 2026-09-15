@@ -1,0 +1,14 @@
+/*
+ * Self-hosted fonts via @fontsource. Importing this file loads every family for all three themes.
+ * In a consuming project you may import only the family your theme uses, e.g.
+ *   import '@fontsource-variable/inter';
+ */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/instrument-sans';
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';

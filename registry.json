@@ -1,0 +1,263 @@
+{
+	"$schema": "https://designbook.local/registry.schema.json",
+	"name": "@ethan/designbook",
+	"version": "0.1.0",
+	"generated": "2026-09-15T13:25:57.562Z",
+	"shared": {
+		"tokens": [
+			"src/lib/tokens"
+		],
+		"styles": [
+			"src/lib/styles"
+		],
+		"utils": [
+			"src/lib/utils/index.ts"
+		],
+		"theme": [
+			"src/lib/theme/theme.svelte.ts"
+		]
+	},
+	"components": [
+		{
+			"name": "avatar",
+			"title": "Avatar",
+			"description": "Image or initials for a person or entity. Falls back to initials automatically when there is no image or it fails to load, with a stable per-name background hue.",
+			"files": [
+				"src/lib/components/avatar/Avatar.svelte",
+				"src/lib/components/avatar/README.md",
+				"src/lib/components/avatar/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "badge",
+			"title": "Badge",
+			"description": "Small status label. Three variants and six tones cover statuses, counts and categories; a `dot` adds a status indicator.",
+			"files": [
+				"src/lib/components/badge/Badge.svelte",
+				"src/lib/components/badge/README.md",
+				"src/lib/components/badge/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "button",
+			"title": "Button",
+			"description": "The primary action control. Renders a `<button>` by default, or an `<a>` when `href` is given, with identical styling in both cases. Five visual variants × three tones × three sizes cover every button in a typical app without custom CSS.",
+			"files": [
+				"src/lib/components/button/Button.svelte",
+				"src/lib/components/button/README.md",
+				"src/lib/components/button/index.ts"
+			],
+			"dependencies": [
+				"spinner"
+			],
+			"external": []
+		},
+		{
+			"name": "card",
+			"title": "Card",
+			"description": "A surface that groups related content. Three variants (outlined, elevated, filled), optional header and footer rows, and an interactive mode for clickable cards.",
+			"files": [
+				"src/lib/components/card/Card.svelte",
+				"src/lib/components/card/README.md",
+				"src/lib/components/card/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "checkbox",
+			"title": "Checkbox",
+			"description": "A native checkbox with a custom box. Supports an indeterminate state for \"select all\" and an optional description line.",
+			"files": [
+				"src/lib/components/checkbox/Checkbox.svelte",
+				"src/lib/components/checkbox/README.md",
+				"src/lib/components/checkbox/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": []
+		},
+		{
+			"name": "container",
+			"title": "Container",
+			"description": "Centres content with a max width from the `--container-*` scale and page-level horizontal padding.",
+			"files": [
+				"src/lib/components/container/Container.svelte",
+				"src/lib/components/container/README.md",
+				"src/lib/components/container/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "divider",
+			"title": "Divider",
+			"description": "A hairline separator, horizontal or vertical, with an optional centred label.",
+			"files": [
+				"src/lib/components/divider/Divider.svelte",
+				"src/lib/components/divider/README.md",
+				"src/lib/components/divider/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "field",
+			"title": "Field",
+			"description": "Wraps a form control with a label, optional hint and error message, and wires the accessibility attributes for you: the label's `for`, the control's `aria-describedby`, `aria-invalid`, `required` and `disabled` all flow through context.",
+			"files": [
+				"src/lib/components/field/Field.svelte",
+				"src/lib/components/field/README.md",
+				"src/lib/components/field/context.ts",
+				"src/lib/components/field/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "grid",
+			"title": "Grid",
+			"description": "CSS grid with two modes: a fixed column count, or responsive auto-fit columns with a minimum width. Both keep a token-driven gap.",
+			"files": [
+				"src/lib/components/grid/Grid.svelte",
+				"src/lib/components/grid/README.md",
+				"src/lib/components/grid/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "heading",
+			"title": "Heading",
+			"description": "Semantic heading (h1–h6) in the theme's display face. Visual size is decoupled from the level so document outlines stay correct while the design does what it needs.",
+			"files": [
+				"src/lib/components/heading/Heading.svelte",
+				"src/lib/components/heading/README.md",
+				"src/lib/components/heading/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "inline",
+			"title": "Inline",
+			"description": "Horizontal flex layout that wraps by default. Use for button rows, tag clouds, toolbars and metadata lines.",
+			"files": [
+				"src/lib/components/inline/Inline.svelte",
+				"src/lib/components/inline/README.md",
+				"src/lib/components/inline/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "input",
+			"title": "Input",
+			"description": "Single-line text input with optional leading/trailing adornments. Reads label, hint, error, required and disabled from a surrounding Field.",
+			"files": [
+				"src/lib/components/input/Input.svelte",
+				"src/lib/components/input/README.md",
+				"src/lib/components/input/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": []
+		},
+		{
+			"name": "radio",
+			"title": "Radio & RadioGroup",
+			"description": "Single choice from a small set. `RadioGroup` owns the value, name, label, hint and error; `Radio` renders one option and reads the group through context.",
+			"files": [
+				"src/lib/components/radio/README.md",
+				"src/lib/components/radio/Radio.svelte",
+				"src/lib/components/radio/RadioGroup.svelte",
+				"src/lib/components/radio/context.ts",
+				"src/lib/components/radio/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "skeleton",
+			"title": "Skeleton",
+			"description": "Loading placeholder that mirrors the shape of the content it stands in for. Hidden from assistive technology; announce loading with `aria-busy` on the region instead.",
+			"files": [
+				"src/lib/components/skeleton/README.md",
+				"src/lib/components/skeleton/Skeleton.svelte",
+				"src/lib/components/skeleton/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "spinner",
+			"title": "Spinner",
+			"description": "Indeterminate loading indicator. Inherits `currentColor` and scales with font size, so it drops into buttons, inputs and text without configuration.",
+			"files": [
+				"src/lib/components/spinner/README.md",
+				"src/lib/components/spinner/Spinner.svelte",
+				"src/lib/components/spinner/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "stack",
+			"title": "Stack",
+			"description": "Vertical flex layout with a token-driven gap. The default way to space things top-to-bottom; reach for it before writing `margin`.",
+			"files": [
+				"src/lib/components/stack/README.md",
+				"src/lib/components/stack/Stack.svelte",
+				"src/lib/components/stack/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "switch",
+			"title": "Switch",
+			"description": "An on/off toggle for settings that take effect immediately. Use a Checkbox instead when the choice is submitted with a form.",
+			"files": [
+				"src/lib/components/switch/README.md",
+				"src/lib/components/switch/Switch.svelte",
+				"src/lib/components/switch/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": []
+		},
+		{
+			"name": "text",
+			"title": "Text",
+			"description": "Body text with size, weight and tone from tokens. Also handles the recurring needs of application text: tabular numerals, truncation and line clamping.",
+			"files": [
+				"src/lib/components/text/README.md",
+				"src/lib/components/text/Text.svelte",
+				"src/lib/components/text/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "textarea",
+			"title": "Textarea",
+			"description": "Multi-line text input. Optional auto-resize grows with content instead of scrolling.",
+			"files": [
+				"src/lib/components/textarea/README.md",
+				"src/lib/components/textarea/Textarea.svelte",
+				"src/lib/components/textarea/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": []
+		}
+	]
+}

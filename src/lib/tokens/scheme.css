@@ -1,0 +1,163 @@
+/*
+ * Scheme switch — the ONLY place light/dark is decided.
+ * Themes define --x-light and --x-dark pairs; this file picks one based on
+ * [data-scheme] on <html> (light | dark | auto). No attribute = auto.
+ *
+ * The mapping is repeated on any [data-theme] element (not just :root) so a subtree
+ * can carry its own theme — e.g. a "terminal" panel inside a "slate" page.
+ */
+
+:root,
+[data-theme] {
+	color-scheme: light;
+	--n-1: var(--n-1-light);
+	--n-2: var(--n-2-light);
+	--n-3: var(--n-3-light);
+	--n-4: var(--n-4-light);
+	--n-5: var(--n-5-light);
+	--n-6: var(--n-6-light);
+	--n-7: var(--n-7-light);
+	--n-8: var(--n-8-light);
+	--n-9: var(--n-9-light);
+	--n-10: var(--n-10-light);
+	--n-11: var(--n-11-light);
+	--n-12: var(--n-12-light);
+	--a-1: var(--a-1-light);
+	--a-2: var(--a-2-light);
+	--a-3: var(--a-3-light);
+	--a-4: var(--a-4-light);
+	--a-5: var(--a-5-light);
+	--a-6: var(--a-6-light);
+	--a-7: var(--a-7-light);
+	--a-8: var(--a-8-light);
+	--a-9: var(--a-9-light);
+	--a-10: var(--a-10-light);
+	--a-11: var(--a-11-light);
+	--a-12: var(--a-12-light);
+	--a-contrast: var(--a-contrast-light);
+	--status-contrast: var(--status-contrast-light);
+	--success-3: var(--success-3-light);
+	--success-6: var(--success-6-light);
+	--success-9: var(--success-9-light);
+	--success-10: var(--success-10-light);
+	--success-11: var(--success-11-light);
+	--warning-3: var(--warning-3-light);
+	--warning-6: var(--warning-6-light);
+	--warning-9: var(--warning-9-light);
+	--warning-10: var(--warning-10-light);
+	--warning-11: var(--warning-11-light);
+	--danger-3: var(--danger-3-light);
+	--danger-6: var(--danger-6-light);
+	--danger-9: var(--danger-9-light);
+	--danger-10: var(--danger-10-light);
+	--danger-11: var(--danger-11-light);
+	--info-3: var(--info-3-light);
+	--info-6: var(--info-6-light);
+	--info-9: var(--info-9-light);
+	--info-10: var(--info-10-light);
+	--info-11: var(--info-11-light);
+}
+
+[data-scheme='dark'],
+[data-scheme='dark'] [data-theme] {
+	color-scheme: dark;
+	--n-1: var(--n-1-dark);
+	--n-2: var(--n-2-dark);
+	--n-3: var(--n-3-dark);
+	--n-4: var(--n-4-dark);
+	--n-5: var(--n-5-dark);
+	--n-6: var(--n-6-dark);
+	--n-7: var(--n-7-dark);
+	--n-8: var(--n-8-dark);
+	--n-9: var(--n-9-dark);
+	--n-10: var(--n-10-dark);
+	--n-11: var(--n-11-dark);
+	--n-12: var(--n-12-dark);
+	--a-1: var(--a-1-dark);
+	--a-2: var(--a-2-dark);
+	--a-3: var(--a-3-dark);
+	--a-4: var(--a-4-dark);
+	--a-5: var(--a-5-dark);
+	--a-6: var(--a-6-dark);
+	--a-7: var(--a-7-dark);
+	--a-8: var(--a-8-dark);
+	--a-9: var(--a-9-dark);
+	--a-10: var(--a-10-dark);
+	--a-11: var(--a-11-dark);
+	--a-12: var(--a-12-dark);
+	--a-contrast: var(--a-contrast-dark);
+	--status-contrast: var(--status-contrast-dark);
+	--success-3: var(--success-3-dark);
+	--success-6: var(--success-6-dark);
+	--success-9: var(--success-9-dark);
+	--success-10: var(--success-10-dark);
+	--success-11: var(--success-11-dark);
+	--warning-3: var(--warning-3-dark);
+	--warning-6: var(--warning-6-dark);
+	--warning-9: var(--warning-9-dark);
+	--warning-10: var(--warning-10-dark);
+	--warning-11: var(--warning-11-dark);
+	--danger-3: var(--danger-3-dark);
+	--danger-6: var(--danger-6-dark);
+	--danger-9: var(--danger-9-dark);
+	--danger-10: var(--danger-10-dark);
+	--danger-11: var(--danger-11-dark);
+	--info-3: var(--info-3-dark);
+	--info-6: var(--info-6-dark);
+	--info-9: var(--info-9-dark);
+	--info-10: var(--info-10-dark);
+	--info-11: var(--info-11-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-scheme='light']),
+	:root:not([data-scheme='light']) [data-theme] {
+		color-scheme: dark;
+		--n-1: var(--n-1-dark);
+		--n-2: var(--n-2-dark);
+		--n-3: var(--n-3-dark);
+		--n-4: var(--n-4-dark);
+		--n-5: var(--n-5-dark);
+		--n-6: var(--n-6-dark);
+		--n-7: var(--n-7-dark);
+		--n-8: var(--n-8-dark);
+		--n-9: var(--n-9-dark);
+		--n-10: var(--n-10-dark);
+		--n-11: var(--n-11-dark);
+		--n-12: var(--n-12-dark);
+		--a-1: var(--a-1-dark);
+		--a-2: var(--a-2-dark);
+		--a-3: var(--a-3-dark);
+		--a-4: var(--a-4-dark);
+		--a-5: var(--a-5-dark);
+		--a-6: var(--a-6-dark);
+		--a-7: var(--a-7-dark);
+		--a-8: var(--a-8-dark);
+		--a-9: var(--a-9-dark);
+		--a-10: var(--a-10-dark);
+		--a-11: var(--a-11-dark);
+		--a-12: var(--a-12-dark);
+		--a-contrast: var(--a-contrast-dark);
+		--status-contrast: var(--status-contrast-dark);
+		--success-3: var(--success-3-dark);
+		--success-6: var(--success-6-dark);
+		--success-9: var(--success-9-dark);
+		--success-10: var(--success-10-dark);
+		--success-11: var(--success-11-dark);
+		--warning-3: var(--warning-3-dark);
+		--warning-6: var(--warning-6-dark);
+		--warning-9: var(--warning-9-dark);
+		--warning-10: var(--warning-10-dark);
+		--warning-11: var(--warning-11-dark);
+		--danger-3: var(--danger-3-dark);
+		--danger-6: var(--danger-6-dark);
+		--danger-9: var(--danger-9-dark);
+		--danger-10: var(--danger-10-dark);
+		--danger-11: var(--danger-11-dark);
+		--info-3: var(--info-3-dark);
+		--info-6: var(--info-6-dark);
+		--info-9: var(--info-9-dark);
+		--info-10: var(--info-10-dark);
+		--info-11: var(--info-11-dark);
+	}
+}

@@ -1,0 +1,85 @@
+/*
+ * Theme: folio
+ * Warm & editorial. Cream neutrals, terracotta accent, generous radii, soft warm shadows, serif display type.
+ * Ramps are 12-step (see primitive.css for step meanings). scheme.css picks light/dark.
+ */
+
+[data-theme='folio'] {
+	/* Neutral ramp */
+	--n-1-light: oklch(98.6% 0.008 80);
+	--n-2-light: oklch(97% 0.012 80);
+	--n-3-light: oklch(94.5% 0.016 78);
+	--n-4-light: oklch(92% 0.02 76);
+	--n-5-light: oklch(89.5% 0.022 74);
+	--n-6-light: oklch(86% 0.024 72);
+	--n-7-light: oklch(80.5% 0.026 70);
+	--n-8-light: oklch(71% 0.028 68);
+	--n-9-light: oklch(54% 0.03 66);
+	--n-10-light: oklch(49% 0.03 64);
+	--n-11-light: oklch(44% 0.032 62);
+	--n-12-light: oklch(22% 0.025 60);
+	--n-1-dark: oklch(15.5% 0.012 65);
+	--n-2-dark: oklch(18.5% 0.013 65);
+	--n-3-dark: oklch(22.5% 0.014 65);
+	--n-4-dark: oklch(25.5% 0.015 65);
+	--n-5-dark: oklch(28.5% 0.016 65);
+	--n-6-dark: oklch(32.5% 0.018 65);
+	--n-7-dark: oklch(38% 0.02 65);
+	--n-8-dark: oklch(46% 0.022 65);
+	--n-9-dark: oklch(55% 0.024 65);
+	--n-10-dark: oklch(60% 0.024 65);
+	--n-11-dark: oklch(75% 0.02 68);
+	--n-12-dark: oklch(95% 0.012 75);
+
+	/* Accent ramp */
+	--a-1-light: oklch(98.5% 0.008 40);
+	--a-2-light: oklch(96.5% 0.02 40);
+	--a-3-light: oklch(93% 0.045 40);
+	--a-4-light: oklch(89% 0.07 40);
+	--a-5-light: oklch(85% 0.09 40);
+	--a-6-light: oklch(79% 0.11 40);
+	--a-7-light: oklch(71% 0.135 40);
+	--a-8-light: oklch(62% 0.16 40);
+	--a-9-light: oklch(55% 0.165 40);
+	--a-10-light: oklch(50% 0.165 40);
+	--a-11-light: oklch(45% 0.15 38);
+	--a-12-light: oklch(28% 0.09 36);
+	--a-1-dark: oklch(17% 0.03 40);
+	--a-2-dark: oklch(20% 0.045 40);
+	--a-3-dark: oklch(25% 0.07 40);
+	--a-4-dark: oklch(29% 0.09 40);
+	--a-5-dark: oklch(33% 0.105 40);
+	--a-6-dark: oklch(38% 0.12 40);
+	--a-7-dark: oklch(45% 0.14 40);
+	--a-8-dark: oklch(55% 0.16 40);
+	--a-9-dark: oklch(66% 0.16 42);
+	--a-10-dark: oklch(71% 0.15 44);
+	--a-11-dark: oklch(82% 0.11 48);
+	--a-12-dark: oklch(94% 0.04 55);
+	--a-contrast-light: var(--white);
+	--a-contrast-dark: oklch(16% 0.02 40);
+
+	/* Typography */
+	--font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+	--font-body: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+	--font-features-body: normal;
+	--font-features-display: normal;
+	--font-display-variation: 'opsz' 72, 'SOFT' 40, 'WONK' 1;
+	--font-display-weight: var(--weight-medium);
+	--font-display-tracking: -0.01em;
+	--text-base: 106.25%;
+
+	/* Shape */
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 16px;
+	--radius-xl: 24px;
+
+	/* Elevation — softer, warm-tinted */
+	--shadow-xs: 0 1px 2px oklch(30% 0.03 60 / 0.06);
+	--shadow-sm: 0 2px 6px oklch(30% 0.03 60 / 0.08);
+	--shadow-md: 0 6px 18px oklch(30% 0.03 60 / 0.1), 0 2px 4px oklch(30% 0.03 60 / 0.05);
+	--shadow-lg: 0 16px 40px oklch(30% 0.03 60 / 0.16), 0 4px 10px oklch(30% 0.03 60 / 0.06);
+	--leading-normal: 1.6;
+}

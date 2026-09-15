@@ -1,0 +1,9 @@
+/* Token layer entry point. Order matters: primitives → density → motion → semantic → themes → scheme. */
+@import './primitive.css';
+@import './density.css';
+@import './motion.css';
+@import './semantic.css';
+@import './themes/slate.css';
+@import './themes/folio.css';
+@import './themes/terminal.css';
+@import './scheme.css';
