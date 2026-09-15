@@ -21,25 +21,33 @@ export const nav: NavSection[] = [
 	{
 		title: 'Components',
 		items: [
+			{ title: 'Alert', href: '/components/alert/' },
 			{ title: 'Avatar', href: '/components/avatar/' },
 			{ title: 'Badge', href: '/components/badge/' },
 			{ title: 'Button', href: '/components/button/' },
 			{ title: 'Card', href: '/components/card/' },
 			{ title: 'Checkbox', href: '/components/checkbox/' },
 			{ title: 'Container', href: '/components/container/' },
+			{ title: 'Dialog', href: '/components/dialog/' },
 			{ title: 'Divider', href: '/components/divider/' },
 			{ title: 'Field', href: '/components/field/' },
 			{ title: 'Grid', href: '/components/grid/' },
 			{ title: 'Heading', href: '/components/heading/' },
 			{ title: 'Inline', href: '/components/inline/' },
 			{ title: 'Input', href: '/components/input/' },
+			{ title: 'Menu', href: '/components/menu/' },
+			{ title: 'Popover', href: '/components/popover/' },
 			{ title: 'Radio', href: '/components/radio/' },
+			{ title: 'Select', href: '/components/select/' },
 			{ title: 'Skeleton', href: '/components/skeleton/' },
 			{ title: 'Spinner', href: '/components/spinner/' },
 			{ title: 'Stack', href: '/components/stack/' },
 			{ title: 'Switch', href: '/components/switch/' },
+			{ title: 'Tabs', href: '/components/tabs/' },
 			{ title: 'Text', href: '/components/text/' },
-			{ title: 'Textarea', href: '/components/textarea/' }
+			{ title: 'Textarea', href: '/components/textarea/' },
+			{ title: 'Toast', href: '/components/toast/' },
+			{ title: 'Tooltip', href: '/components/tooltip/' }
 		]
 	}
 ];

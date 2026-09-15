@@ -59,8 +59,13 @@ Any element can carry its own `data-theme` to theme a subtree. `theme.set({...})
 - Private CSS custom properties inside a component are prefixed `--_` (e.g. `--_bg`).
 - Styles are scoped `<style>` blocks. `:global` only for children rendered via snippets.
 - Native elements first (`<button>`, `<a>`, `<input>`). Overlay/selection components (Dialog,
-  Popover, Menu, Select, Combobox, Tabs, Tooltip) are built on **Bits UI** primitives; everything
-  else is dependency-free.
+  Popover, Menu, Select, Tabs, Tooltip) are built on **Bits UI** primitives; everything else is
+  dependency-free. Bits conventions used here: the trigger is exposed as a `trigger(props)` snippet
+  the caller spreads onto its own element (`{#snippet trigger(props)}<Button {...props}>…`); floating
+  panels are portalled, styled through `:global(.db-*)` rules and animated via `data-state` with the
+  keyframes in `styles/overlays.css`; pass `class` to Bits as a string (`cn(...)`), not an array.
+- Toasts: `toast()` from `components/toast/toast.svelte.ts` plus one `<Toaster />` in the root
+  layout. Alerts are inline and static; toasts are transient.
 - Icons: `@lucide/svelte`, rendered inside a snippet (`leading`/`trailing`), sized by the component
   via `width/height: 1.15em`.
 - SSR-safe: guard `window`/`document` (`typeof document !== 'undefined'`). No `$app/*` imports in

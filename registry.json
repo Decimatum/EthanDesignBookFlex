@@ -2,7 +2,7 @@
 	"$schema": "https://designbook.local/registry.schema.json",
 	"name": "@ethan/designbook",
 	"version": "0.1.0",
-	"generated": "2026-09-15T13:25:57.562Z",
+	"generated": "2026-09-15T15:19:01.842Z",
 	"shared": {
 		"tokens": [
 			"src/lib/tokens"
@@ -18,6 +18,20 @@
 		]
 	},
 	"components": [
+		{
+			"name": "alert",
+			"title": "Alert",
+			"description": "An inline message that stays in the page: status, warnings, errors, or context the user should read before acting. For transient feedback use Toast instead.",
+			"files": [
+				"src/lib/components/alert/Alert.svelte",
+				"src/lib/components/alert/README.md",
+				"src/lib/components/alert/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
 		{
 			"name": "avatar",
 			"title": "Avatar",
@@ -95,6 +109,21 @@
 			"external": []
 		},
 		{
+			"name": "dialog",
+			"title": "Dialog",
+			"description": "A modal window built on Bits UI's Dialog: focus is trapped, the page behind is inert and scroll-locked, Escape and overlay clicks close it (unless `dismissible={false}`), and focus returns to the trigger on close.",
+			"files": [
+				"src/lib/components/dialog/Dialog.svelte",
+				"src/lib/components/dialog/README.md",
+				"src/lib/components/dialog/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui",
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "divider",
 			"title": "Divider",
 			"description": "A hairline separator, horizontal or vertical, with an optional centred label.",
@@ -170,6 +199,38 @@
 			"external": []
 		},
 		{
+			"name": "menu",
+			"title": "Menu",
+			"description": "A dropdown menu of actions, built on Bits UI's DropdownMenu: arrow-key navigation, typeahead, focus return and dismissal are handled for you. Compose it from `Menu`, `MenuItem`, `MenuCheckboxItem`, `MenuGroup` and `MenuSeparator`.",
+			"files": [
+				"src/lib/components/menu/Menu.svelte",
+				"src/lib/components/menu/MenuCheckboxItem.svelte",
+				"src/lib/components/menu/MenuGroup.svelte",
+				"src/lib/components/menu/MenuItem.svelte",
+				"src/lib/components/menu/MenuSeparator.svelte",
+				"src/lib/components/menu/README.md",
+				"src/lib/components/menu/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui"
+			]
+		},
+		{
+			"name": "popover",
+			"title": "Popover",
+			"description": "A floating panel anchored to its trigger, for filters, pickers, small forms and previews. Positioning, collision avoidance, focus management and dismissal come from Bits UI.",
+			"files": [
+				"src/lib/components/popover/Popover.svelte",
+				"src/lib/components/popover/README.md",
+				"src/lib/components/popover/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui"
+			]
+		},
+		{
 			"name": "radio",
 			"title": "Radio & RadioGroup",
 			"description": "Single choice from a small set. `RadioGroup` owns the value, name, label, hint and error; `Radio` renders one option and reads the group through context.",
@@ -182,6 +243,23 @@
 			],
 			"dependencies": [],
 			"external": []
+		},
+		{
+			"name": "select",
+			"title": "Select",
+			"description": "A single-choice dropdown built on Bits UI's Select, styled to match Input. Takes a flat `items` array (optionally grouped), works inside Field, and submits through a hidden input when given a `name`.",
+			"files": [
+				"src/lib/components/select/README.md",
+				"src/lib/components/select/Select.svelte",
+				"src/lib/components/select/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": [
+				"bits-ui",
+				"@lucide/svelte"
+			]
 		},
 		{
 			"name": "skeleton",
@@ -234,6 +312,24 @@
 			"external": []
 		},
 		{
+			"name": "tabs",
+			"title": "Tabs",
+			"description": "Switch between sections of related content. Built on Bits UI's Tabs for roving focus and ARIA wiring; compose it from `Tabs`, `TabList`, `Tab` and `TabPanel`.",
+			"files": [
+				"src/lib/components/tabs/README.md",
+				"src/lib/components/tabs/Tab.svelte",
+				"src/lib/components/tabs/TabList.svelte",
+				"src/lib/components/tabs/TabPanel.svelte",
+				"src/lib/components/tabs/Tabs.svelte",
+				"src/lib/components/tabs/context.ts",
+				"src/lib/components/tabs/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui"
+			]
+		},
+		{
 			"name": "text",
 			"title": "Text",
 			"description": "Body text with size, weight and tone from tokens. Also handles the recurring needs of application text: tabular numerals, truncation and line clamping.",
@@ -258,6 +354,35 @@
 				"field"
 			],
 			"external": []
+		},
+		{
+			"name": "toast",
+			"title": "Toast",
+			"description": "Transient notifications. Call `toast()` from anywhere (components, load functions, stores) and render one `<Toaster />` near the root of the app. Toasts auto-dismiss, pause while hovered or focused, and are announced through a polite live region.",
+			"files": [
+				"src/lib/components/toast/README.md",
+				"src/lib/components/toast/Toaster.svelte",
+				"src/lib/components/toast/index.ts",
+				"src/lib/components/toast/toast.svelte.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "tooltip",
+			"title": "Tooltip",
+			"description": "A short label shown on hover or keyboard focus. For icon-only buttons and truncated text — never for content the user needs to act on.",
+			"files": [
+				"src/lib/components/tooltip/README.md",
+				"src/lib/components/tooltip/Tooltip.svelte",
+				"src/lib/components/tooltip/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui"
+			]
 		}
 	]
 }

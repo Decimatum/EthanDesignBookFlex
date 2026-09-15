@@ -4,6 +4,7 @@
 	import { page } from '$app/state';
 	import { nav } from '$docs/nav.js';
 	import ThemeSwitcher from '$docs/ThemeSwitcher.svelte';
+	import { Toaster } from '$lib/index.js';
 
 	let { children } = $props();
 </script>
@@ -45,6 +46,8 @@
 		{@render children()}
 	</main>
 </div>
+
+<Toaster />
 
 <style>
 	.skip-link {

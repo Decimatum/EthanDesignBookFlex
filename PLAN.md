@@ -255,11 +255,22 @@ Implementation rules: each theme defines `--font-display`, `--font-body`, `--fon
 - Tests: component tests now load the design-system CSS (`vitest.setup.ts`), which is what let the Text and Input bugs be pinned by assertions. e2e no longer sets `data-*` after navigation (raced hydration → order-dependent baselines and stale auto-resize measurements); it seeds `localStorage` before load instead. 171 baselines regenerated and verified stable across two runs with different worker counts.
 - Docs: props tables on Button/Spinner and in the generator template moved to `PropsTable`; skip-to-content link added to the layout.
 
+**2026-09-15 (Phase 3a/3b) — 27 components; overlays on Bits UI.**
+
+- Bits UI–backed: Dialog, Popover, Tooltip, Menu (+ MenuItem, MenuCheckboxItem, MenuGroup, MenuSeparator), Select, Tabs (+ TabList, Tab, TabPanel). Hand-written: Alert, Toast (`toast()` store + `<Toaster />`).
+- Shared `styles/overlays.css` keyframes; every floating layer animates from Bits' `data-state`, so reduced-motion zeroes it all through the motion tokens.
+- API shape settled for overlays: `trigger(props)` snippet the caller spreads onto its own element, `children({ close })`, bindable `open`. Documented in CLAUDE.md.
+- Select integrates with Field (label `for`, `aria-describedby`, invalid/disabled) and renders a hidden input for forms; groups via an `items[].group` key.
+- Toast timers pause on hover/focus and survive in-place updates (monotonic `seq`); `toast.promise()` covers loading → success/error.
+- Verification: 83 unit tests (all overlays exercised with real clicks and keyboard), 192/192 axe checks (32 pages × 3 × 2), 243 screenshot baselines regenerated and verified stable.
+- Docs layout now mounts `<Toaster />` so the Toast page is live.
+- Found and fixed while testing: Tooltip content lacked `role="tooltip"` (Bits doesn't add it), so it now does; the pointer position persisting between browser tests correctly paused toast timers — tests park the mouse first.
+
 Next up: Phase 3 composites, beginning with the Bits UI–backed overlays (Dialog, Popover, Tooltip, DropdownMenu, Select) and the remaining Phase 2 stragglers above.
 
 ## 8. Immediate next steps
 
-1. Make the first git commit (repo is initialised, nothing committed yet).
-2. Phase 3: Dialog, Popover, Tooltip, DropdownMenu, Select on Bits UI; then Tabs, Toast, Alert, Table.
-3. Sweep the Phase 2 stragglers (IconButton, ButtonGroup, Slider, Tag, Kbd, Link) using `npm run new:component`.
-4. Revisit density: compact mode has only been eyeballed in screenshots; tune `--space-unit` and control heights against a real dense layout once Table exists.
+1. Phase 3c: Table (sortable, sticky header), Accordion, Breadcrumb, Pagination, Progress, EmptyState, Drawer (Dialog variant), Combobox, DatePicker.
+2. Sweep the Phase 2 stragglers (IconButton, ButtonGroup, Slider, Tag, Kbd, Link) using `npm run new:component`.
+3. Phase 4 flow layer: AppShell, PageTransition, Stepper, RouteProgress, CommandPalette.
+4. Revisit density against Table once it exists.

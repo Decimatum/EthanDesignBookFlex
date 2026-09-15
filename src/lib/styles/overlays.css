@@ -1,0 +1,61 @@
+/*
+ * Shared overlay motion. Bits UI sets data-state="open|closed" on floating/overlay elements and
+ * keeps them mounted until the exit animation ends, so both directions can be animated here.
+ * Durations come from the motion tokens, so reduced-motion zeroes them globally.
+ */
+@keyframes db-fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+@keyframes db-fade-out {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+@keyframes db-pop-in {
+	from {
+		opacity: 0;
+		transform: translateY(4px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+@keyframes db-pop-out {
+	from {
+		opacity: 1;
+		transform: none;
+	}
+	to {
+		opacity: 0;
+		transform: translateY(4px) scale(0.98);
+	}
+}
+@keyframes db-dialog-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+@keyframes db-dialog-out {
+	from {
+		opacity: 1;
+		transform: none;
+	}
+	to {
+		opacity: 0;
+		transform: translateY(8px) scale(0.98);
+	}
+}
