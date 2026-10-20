@@ -78,6 +78,8 @@ Three independent axes, all applied as attributes on `<html>` so any project can
 
 Separating scheme and density from theme is deliberate: a "dark, dense trading dashboard" is `terminal + dark + compact`, but nothing stops a `slate + dark + comfortable` marketing site. This also means every component gets tested across all combinations automatically, which is where most style bugs surface.
 
+On top of the three axes sit two **profiles** — `public` (client-facing) and `app` (admin/internal) — which are not a fourth attribute but named compositions: which shell, which defaults, which components are reached for, which budgets apply. A product that is both uses SvelteKit route groups with one shell and one theme per group. The table and the recipe live in `USING.md` §3.
+
 ### 2.3 Headless foundation for the hard components
 
 Recommendation: build overlay and selection components (Dialog, Popover, Menu, Select, Combobox, Tabs, Tooltip) on top of **Bits UI** (headless Svelte 5 primitives) rather than hand-rolling focus trapping, aria wiring, typeahead, and positioning. These are where 80% of accessibility bugs live in home-grown libraries. Everything visual and everything simple (Button, Input, Card, Badge, Stack…) stays hand-written with zero dependencies.
@@ -156,6 +158,26 @@ This is requirement #3 and where most libraries stop short.
 - Playground route with a live prop editor, theme/scheme/density toggles, and a "copy code" button.
 - `CLAUDE.md` finalised: how to add a component, how to compose flows, which tokens to use for what, anti-patterns.
 
+### Phase 8 — Public surface (after Phase 5; can run alongside 6–7)
+
+The library serves two profiles (`USING.md` §3): **`app`** — admin and internal tools — is
+covered by AppShell, Nav, CommandPalette, Table/VirtualList/DataTable, Stat, Delta, Ticker and
+the dashboard/settings patterns. **`public`** — client-facing sites — has the primitives and the
+auth/checkout/onboarding patterns but not the page-level anatomy. This phase closes that gap:
+
+- `MarketingShell` (flow): brand + horizontal Nav + CTA header, transparent-to-frosted on scroll,
+  mobile drawer, footer slot — the public counterpart of AppShell.
+- `Section` / `Hero`, `Footer`, `FeatureGrid`, `Pricing` (built from Card + Stat), `Testimonial`,
+  `LogoCloud`, `CTA`, `FAQ` (on Accordion), `Prose` typography (`.db-prose`, also what
+  `MarkdownText` renders into), `ContactForm` pattern.
+- Patterns: `landing`, `pricing`, `article`, `contact`, `legal`.
+- Public budgets enforced in the docs site: pattern pages prerendered, Lighthouse run in review
+  passes (performance and accessibility ≥ 95), only the active theme's fonts loaded on those pages.
+- Theme-per-route-group recipe (`USING.md` §3) demonstrated: the docs site's own landing page
+  runs the `public` profile; the component pages stay `app`.
+
+Which sections come first depends on the first client-facing project; `REQUESTS.md` orders them.
+
 ### Phase 7 — Hardening & v1.0 (≈ 1 week)
 
 Full axe sweep across every docs page × 3 themes × 2 schemes. Playwright screenshot baselines for every component in every theme. Keyboard-only walkthrough of every flow pattern. Bundle-size budget per component (tree-shaking check). Tag `v1.0.0`; from here on Changesets handles releases.
@@ -223,54 +245,8 @@ Implementation rules: each theme defines `--font-display`, `--font-body`, `--fon
 
 ---
 
-## 7. Status log
+## 7. Status and next steps
 
-**2026-09-15 — Phase 0 complete, Phase 1 substantially complete, Button + Spinner done.**
-
-- Repo scaffolded (SvelteKit, Svelte 5, TS strict, ESLint, Prettier, Vitest browser mode, Playwright, axe, Changesets, adapter-static).
-- Token system built: 12-step ramps, `scheme.css` light/dark switch, three themes, density and motion axes, nested `data-theme` support. All key token pairs verified ≥ 4.5:1 contrast in every theme × scheme.
-- `theme.svelte.ts` controller + no-flash init script in `app.html`.
-- Docs site with Foundations (colors, typography, spacing, motion) and component pages; the docs site is itself the a11y and visual test target.
-- `Button` (reference implementation) and `Spinner` through the full definition of done: 9 + 2 tests, 42/42 axe checks, 24 screenshot baselines.
-- `CLAUDE.md`, `llms.txt`, `registry.json`, `npm run new:component`, `npm run gen:docs` in place.
-- Known constraint: Playwright cannot download browsers from the local Linux VM, so browser tests currently run in the cloud workspace (set `PW_CHROMIUM_PATH` to reuse an existing Chromium). Screenshot baselines were generated there.
-
-**2026-09-15 (later) — Phase 2 primitives complete: 19 components.**
-
-- Layout: Stack, Inline, Grid, Container, Divider. Typography: Text, Heading. Display: Badge, Card, Avatar, Skeleton. Forms: Field, Input, Textarea, Checkbox, Radio + RadioGroup, Switch.
-- Shared vocab in `src/lib/types.ts` (`Space`, `Align`, `Justify`, `Tone`, `Size`) so every layout prop uses the same scale keys.
-- Field → control wiring via Svelte context (`getFieldContext`): label `for`, `aria-describedby`, `aria-invalid`, `required`, `disabled` all propagate; RadioGroup does the same for radios.
-- Form controls keep the native input in the DOM (`.sr-only`) so forms, labels and screen readers work unchanged; only the visuals are custom.
-- Docs: `src/docs/PropsTable.svelte` for prop tables (prettier mangles hand-written tables in `.svelte`); `svelte/no-useless-mustaches` is off for docs routes.
-- Verification: 56 unit tests, 144/144 axe checks (24 pages × 3 themes × 2 schemes), 171 screenshot baselines (theme × scheme at comfortable density + one compact per theme). e2e emulates `prefers-reduced-motion` so axe never samples a colour mid-transition — that was the only flake found.
-- Deviation from the original Phase 2 list: Icon, IconButton, ButtonGroup, Toggle, Slider, Tag, Code/Kbd/Link, Box/Spacer/AspectRatio are still open. Icon is covered adequately by `@lucide/svelte` used directly inside snippets; the rest move to the start of Phase 3.
-
-**2026-09-15 (review pass) — bugs fixed, no regressions.**
-
-- Text: a default-tone Text nested inside a toned Text inherited the parent's colour (private `--_color` is inherited like any custom property). Base rule now sets `--_color` explicitly; `tone="inherit"` uses `color: inherit` directly, since `inherit` inside `var()` inherits the variable, not the colour.
-- Input: two focus rings (wrapper `:focus-within` plus the global `:focus-visible` on the inner control). Inner ring suppressed.
-- Textarea `autoResize` measured once; now re-fits on width, font-load and density changes via `ResizeObserver` + `document.fonts.ready`, and clears its inline height when switched off.
-- Avatar: a failed image never retried after `src` changed. Reset on change.
-- Checkbox: `indeterminate` is re-asserted after a click so the parent stays in control of the mixed state.
-- Tests: component tests now load the design-system CSS (`vitest.setup.ts`), which is what let the Text and Input bugs be pinned by assertions. e2e no longer sets `data-*` after navigation (raced hydration → order-dependent baselines and stale auto-resize measurements); it seeds `localStorage` before load instead. 171 baselines regenerated and verified stable across two runs with different worker counts.
-- Docs: props tables on Button/Spinner and in the generator template moved to `PropsTable`; skip-to-content link added to the layout.
-
-**2026-09-15 (Phase 3a/3b) — 27 components; overlays on Bits UI.**
-
-- Bits UI–backed: Dialog, Popover, Tooltip, Menu (+ MenuItem, MenuCheckboxItem, MenuGroup, MenuSeparator), Select, Tabs (+ TabList, Tab, TabPanel). Hand-written: Alert, Toast (`toast()` store + `<Toaster />`).
-- Shared `styles/overlays.css` keyframes; every floating layer animates from Bits' `data-state`, so reduced-motion zeroes it all through the motion tokens.
-- API shape settled for overlays: `trigger(props)` snippet the caller spreads onto its own element, `children({ close })`, bindable `open`. Documented in CLAUDE.md.
-- Select integrates with Field (label `for`, `aria-describedby`, invalid/disabled) and renders a hidden input for forms; groups via an `items[].group` key.
-- Toast timers pause on hover/focus and survive in-place updates (monotonic `seq`); `toast.promise()` covers loading → success/error.
-- Verification: 83 unit tests (all overlays exercised with real clicks and keyboard), 192/192 axe checks (32 pages × 3 × 2), 243 screenshot baselines regenerated and verified stable.
-- Docs layout now mounts `<Toaster />` so the Toast page is live.
-- Found and fixed while testing: Tooltip content lacked `role="tooltip"` (Bits doesn't add it), so it now does; the pointer position persisting between browser tests correctly paused toast timers — tests park the mouse first.
-
-Next up: Phase 3 composites, beginning with the Bits UI–backed overlays (Dialog, Popover, Tooltip, DropdownMenu, Select) and the remaining Phase 2 stragglers above.
-
-## 8. Immediate next steps
-
-1. Phase 3c: Table (sortable, sticky header), Accordion, Breadcrumb, Pagination, Progress, EmptyState, Drawer (Dialog variant), Combobox, DatePicker.
-2. Sweep the Phase 2 stragglers (IconButton, ButtonGroup, Slider, Tag, Kbd, Link) using `npm run new:component`.
-3. Phase 4 flow layer: AppShell, PageTransition, Stepper, RouteProgress, CommandPalette.
-4. Revisit density against Table once it exists.
+The plan above is stable. Current state, verification counts, environment notes and the next
+steps live in **`STATUS.md`** (one page, kept current). The full session-by-session log lives in
+**`HISTORY.md`** — read it only when you need to know _why_ something was done.

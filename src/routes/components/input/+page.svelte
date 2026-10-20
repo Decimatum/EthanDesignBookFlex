@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { Input, Field, Stack, Grid } from '$lib/index.js';
-	import { Search, Mail, Lock } from '@lucide/svelte';
+	import { Search, Mail, Lock, Eye, EyeOff, X } from '@lucide/svelte';
 	import Demo from '$docs/Demo.svelte';
 	import PropsTable from '$docs/PropsTable.svelte';
 	let q = $state('');
+	let secret = $state('hunter2');
+	let show = $state(false);
+	let query = $state('svelte runes');
 </script>
 
 <h1>Input</h1>
@@ -54,6 +57,47 @@
 </Demo>
 
 <Demo
+	title="Action"
+	stack
+	code={`<Input type={show ? 'text' : 'password'} bind:value={secret} aria-label="Password">
+	{#snippet action()}
+		<button type="button" aria-label={show ? 'Hide password' : 'Show password'} aria-pressed={show} onclick={() => (show = !show)}>
+			{#if show}<EyeOff />{:else}<Eye />{/if}
+		</button>
+	{/snippet}
+</Input>
+<Input bind:value={query} aria-label="Search">
+	{#snippet action()}
+		{#if query}<button type="button" aria-label="Clear" onclick={() => (query = '')}><X /></button>{/if}
+	{/snippet}
+</Input>`}
+>
+	<Grid min="14rem" gap="3">
+		<Input type={show ? 'text' : 'password'} bind:value={secret} aria-label="Password">
+			{#snippet leading()}<Lock />{/snippet}
+			{#snippet action()}
+				<button
+					type="button"
+					aria-label={show ? 'Hide password' : 'Show password'}
+					aria-pressed={show}
+					onclick={() => (show = !show)}
+				>
+					{#if show}<EyeOff />{:else}<Eye />{/if}
+				</button>
+			{/snippet}
+		</Input>
+		<Input bind:value={query} placeholder="Search" aria-label="Search">
+			{#snippet leading()}<Search />{/snippet}
+			{#snippet action()}
+				{#if query}<button type="button" aria-label="Clear search" onclick={() => (query = '')}
+						><X /></button
+					>{/if}
+			{/snippet}
+		</Input>
+	</Grid>
+</Demo>
+
+<Demo
 	title="States"
 	stack
 	code={`<Input invalid value="bad" />\n<Input disabled value="Locked" />`}
@@ -78,6 +122,17 @@
 		{ name: 'size', type: "'sm' | 'md' | 'lg'", default: "'md'" },
 		{ name: 'invalid', type: 'boolean', default: 'from Field' },
 		{ name: 'numeric', type: 'boolean', default: 'false', description: 'Tabular numerals.' },
-		{ name: 'disabled / required / id', type: 'native', default: 'from Field' }
+		{ name: 'disabled / required / id', type: 'native', default: 'from Field' },
+		{
+			name: 'leading / trailing',
+			type: 'Snippet',
+			description: 'Decorative adornments (aria-hidden).'
+		},
+		{
+			name: 'action',
+			type: 'Snippet',
+			description:
+				'An interactive control after the value — clear, show/hide password. A plain <button> inside is styled; give it an aria-label.'
+		}
 	]}
 />

@@ -15,6 +15,11 @@
 		leading?: Snippet;
 		/** Icon or text after the value. */
 		trailing?: Snippet;
+		/**
+		 * An interactive control after the value (clear, show/hide password, submit). Unlike the
+		 * adornments it is not `aria-hidden`; a plain `<button type="button">` inside is styled.
+		 */
+		action?: Snippet;
 		class?: string;
 	}
 </script>
@@ -33,6 +38,7 @@
 		type = 'text',
 		leading,
 		trailing,
+		action,
 		class: className,
 		...rest
 	}: InputProps = $props();
@@ -66,6 +72,7 @@
 	/>
 	{#if trailing}<span class="db-input__adornment" aria-hidden="true">{@render trailing()}</span
 		>{/if}
+	{#if action}<span class="db-input__action">{@render action()}</span>{/if}
 </div>
 
 <style>
@@ -151,6 +158,46 @@
 		font-size: var(--text-sm);
 	}
 	.db-input__adornment :global(svg) {
+		width: 1.1em;
+		height: 1.1em;
+	}
+	/* Interactive trailing control: a compact, borderless button that inherits the input's height. */
+	.db-input__action {
+		display: inline-flex;
+		align-items: center;
+		flex: none;
+		margin-inline-end: calc(var(--_px) * -0.5);
+	}
+	.db-input__action > :global(button) {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--space-1);
+		height: calc(var(--_h) - 2 * var(--control-border-width) - var(--space-1));
+		min-width: calc(var(--_h) - 2 * var(--control-border-width) - var(--space-1));
+		padding-inline: var(--space-1-5);
+		border: none;
+		border-radius: calc(var(--control-radius) - 2px);
+		background: none;
+		color: var(--color-text-muted);
+		font: inherit;
+		font-size: var(--text-sm);
+		cursor: pointer;
+		transition: var(--transition-colors);
+	}
+	.db-input__action > :global(button:hover) {
+		color: var(--color-text);
+		background: var(--color-component-hover);
+	}
+	.db-input__action > :global(button:focus-visible) {
+		box-shadow: var(--focus-ring-inset);
+		color: var(--color-text);
+	}
+	.db-input__action > :global(button:disabled) {
+		color: var(--color-text-disabled);
+		cursor: not-allowed;
+	}
+	.db-input__action :global(svg) {
 		width: 1.1em;
 		height: 1.1em;
 	}

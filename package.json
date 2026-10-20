@@ -1,11 +1,12 @@
 {
 	"name": "@ethan/designbook",
-	"version": "0.1.0",
+	"version": "0.3.0",
 	"description": "Design Book — a themeable Svelte 5 UI framework and component library.",
 	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",
+		"build:docs": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"prepack": "svelte-kit sync && svelte-package && publint",
@@ -19,8 +20,13 @@
 		"test:a11y": "playwright test --grep @a11y",
 		"test:visual": "playwright test --grep @visual",
 		"test:visual:update": "playwright test --grep @visual --update-snapshots",
+		"test:changed": "node scripts/test-changed.js",
+		"shots:optimize": "node scripts/optimize-shots.js",
+		"shots:manifest": "node scripts/shots-manifest.js",
 		"new:component": "node scripts/new-component.js",
 		"gen:docs": "node scripts/gen-docs.js",
+		"pack:local": "npm pack --pack-destination releases",
+		"skill:install": "sh scripts/install-skill.sh",
 		"changeset": "changeset",
 		"release": "npm run build && changeset publish"
 	},
@@ -59,6 +65,7 @@
 		"@fontsource-variable/jetbrains-mono": "^5.3.0",
 		"@fontsource/ibm-plex-mono": "^5.3.0",
 		"@fontsource/ibm-plex-sans": "^5.3.0",
+		"@internationalized/date": "^3.8.1",
 		"@lucide/svelte": "^1.46.0",
 		"bits-ui": "^2.19.2"
 	},

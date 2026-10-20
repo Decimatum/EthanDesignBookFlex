@@ -82,4 +82,22 @@
 	--shadow-md: 0 0 0 1px var(--n-7), 0 4px 16px oklch(0% 0 0 / 0.25);
 	--shadow-lg: 0 0 0 1px var(--n-7), 0 12px 32px oklch(0% 0 0 / 0.4);
 	--leading-normal: 1.4;
+
+	/* App shell — panels: hairline-bordered sidebar, flush square content, rail indicator */
+	--shell-canvas: var(--n-1);
+	--shell-sidebar-bg: var(--n-2);
+	--shell-sidebar-border: var(--n-6);
+	--shell-surface: var(--n-1);
+	--shell-surface-border: var(--n-7);
+	--shell-surface-shadow: none;
+	--shell-radius: var(--radius-md);
+	--shell-gap: var(--space-2);
+	--shell-header-bg: color-mix(in srgb, var(--n-1) 88%, transparent);
+	--shell-header-blur: 6px;
+	--shell-nav-hover-bg: var(--n-3);
+	--shell-nav-active-bg: color-mix(in srgb, var(--a-9) 12%, transparent);
+	--shell-nav-active-fg: var(--a-11);
+	--shell-nav-indicator-w: 2px;
+	--shell-nav-underline-h: 2px;
+	--shell-nav-radius: var(--radius-sm);
 }

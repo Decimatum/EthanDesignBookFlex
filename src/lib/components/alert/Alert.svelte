@@ -10,6 +10,8 @@
 		title?: string;
 		/** Show a close button; the alert removes itself and calls `onDismiss`. */
 		dismissible?: boolean;
+		/** Bindable visibility, so a dismissed alert can be shown again. */
+		open?: boolean;
 		onDismiss?: () => void;
 		/** Replace the default tone icon. Pass `null` to hide it. */
 		icon?: Snippet | null;
@@ -27,15 +29,16 @@
 		tone = 'info',
 		title,
 		dismissible = false,
+		open = $bindable(true),
 		onDismiss,
 		icon,
 		actions,
 		children,
 		class: className,
+		role: roleProp,
 		...rest
 	}: AlertProps = $props();
 
-	let open = $state(true);
 	function dismiss() {
 		open = false;
 		onDismiss?.();
@@ -50,7 +53,7 @@
 	};
 	const DefaultIcon = $derived(icons[tone]);
 	// Danger and warning interrupt; the rest are polite status updates.
-	const role = $derived(tone === 'danger' || tone === 'warning' ? 'alert' : 'status');
+	const role = $derived(roleProp ?? (tone === 'danger' || tone === 'warning' ? 'alert' : 'status'));
 </script>
 
 {#if open}

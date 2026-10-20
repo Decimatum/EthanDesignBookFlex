@@ -54,8 +54,7 @@ Returns the toast id. Also: `toast.dismiss(id)`, `toast.clear()`, `toast.promise
 
 ## Accessibility
 
-- New toasts are announced via an `aria-live="polite"` region; focus is never moved.
-- `danger` toasts use `role="alert"`, others `role="status"`.
+- New toasts are announced once, through visually hidden live regions: `danger` toasts go to an assertive `role="alert"` region, everything else to a polite `role="status"` region. The visible cards carry no live role, so nothing is read twice, and focus is never moved.
 - Timers pause on hover and on keyboard focus, so a user can always finish reading.
 - Keep at most a handful visible (`toasts.max`, default 5); older ones are dropped.
 
@@ -67,7 +66,8 @@ Returns the toast id. Also: `toast.dismiss(id)`, `toast.clear()`, `toast.promise
 
 ```
 <div class="db-toaster" role="region" aria-label="Notifications" data-position>
-  <div class="sr-only" aria-live="polite">
-  <div class="db-toast" role="status|alert" data-tone>
+  <div class="sr-only" role="status" aria-live="polite">
+  <div class="sr-only" role="alert" aria-live="assertive">
+  <div class="db-toast" data-tone>
     <span class="db-toast__icon"> <div class="db-toast__content"> <button class="db-toast__action"> <button class="db-toast__close">
 ```

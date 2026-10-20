@@ -40,16 +40,20 @@
 	const id = $derived(idProp ?? `db-field-${generated}`);
 	const hintId = $derived(`${id}-hint`);
 	const errorId = $derived(`${id}-error`);
+	const labelId = $derived(label ? `${id}-label` : undefined);
 	const describedBy = $derived(
 		[error ? errorId : null, hint ? hintId : null].filter(Boolean).join(' ') || undefined
 	);
 
 	setFieldContext({
 		get id() {
-			return id;
+			return as === 'fieldset' ? undefined : id;
+		},
+		get labelId() {
+			return labelId;
 		},
 		get describedBy() {
-			return describedBy;
+			return as === 'fieldset' ? undefined : describedBy;
 		},
 		get invalid() {
 			return Boolean(error);
@@ -74,11 +78,11 @@
 >
 	{#if label}
 		{#if as === 'fieldset'}
-			<legend class="db-field__label">
+			<legend class="db-field__label" id={labelId}>
 				{label}{#if required}<span class="db-field__required" aria-hidden="true">*</span>{/if}
 			</legend>
 		{:else}
-			<label class="db-field__label" for={id}>
+			<label class="db-field__label" for={id} id={labelId}>
 				{label}{#if required}<span class="db-field__required" aria-hidden="true">*</span>{/if}
 			</label>
 		{/if}

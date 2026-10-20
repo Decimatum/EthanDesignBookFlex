@@ -1,8 +1,8 @@
 {
 	"$schema": "https://designbook.local/registry.schema.json",
 	"name": "@ethan/designbook",
-	"version": "0.1.0",
-	"generated": "2026-09-15T15:19:01.842Z",
+	"version": "0.3.0",
+	"generated": "2026-10-20T03:52:34.491Z",
 	"shared": {
 		"tokens": [
 			"src/lib/tokens"
@@ -19,7 +19,25 @@
 	},
 	"components": [
 		{
+			"name": "accordion",
+			"kind": "component",
+			"title": "Accordion",
+			"description": "Vertically stacked disclosure sections. Built on Bits UI's Accordion for keyboard navigation and ARIA wiring; compose it from `Accordion` and `AccordionItem`.",
+			"files": [
+				"src/lib/components/accordion/Accordion.svelte",
+				"src/lib/components/accordion/AccordionItem.svelte",
+				"src/lib/components/accordion/README.md",
+				"src/lib/components/accordion/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui",
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "alert",
+			"kind": "component",
 			"title": "Alert",
 			"description": "An inline message that stays in the page: status, warnings, errors, or context the user should read before acting. For transient feedback use Toast instead.",
 			"files": [
@@ -34,6 +52,7 @@
 		},
 		{
 			"name": "avatar",
+			"kind": "component",
 			"title": "Avatar",
 			"description": "Image or initials for a person or entity. Falls back to initials automatically when there is no image or it fails to load, with a stable per-name background hue.",
 			"files": [
@@ -46,6 +65,7 @@
 		},
 		{
 			"name": "badge",
+			"kind": "component",
 			"title": "Badge",
 			"description": "Small status label. Three variants and six tones cover statuses, counts and categories; a `dot` adds a status indicator.",
 			"files": [
@@ -57,7 +77,38 @@
 			"external": []
 		},
 		{
+			"name": "banner",
+			"kind": "component",
+			"title": "Banner",
+			"description": "A full-width, single-line notice that belongs to a page or a section rather than to a form field: \"3 of 3 in progress — the limit\", \"September is not closed yet\", \"2 captures unsent, retrying\". Where an Alert is a boxed message inside the flow, a Banner runs edge to edge across the top of its container, carries one message and, optionally, one or two actions.",
+			"files": [
+				"src/lib/components/banner/Banner.svelte",
+				"src/lib/components/banner/README.md",
+				"src/lib/components/banner/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "breadcrumb",
+			"kind": "component",
+			"title": "Breadcrumb",
+			"description": "Shows where the current page sits in a hierarchy and lets the user jump back up. Long trails collapse the middle into an ellipsis that expands on click.",
+			"files": [
+				"src/lib/components/breadcrumb/Breadcrumb.svelte",
+				"src/lib/components/breadcrumb/README.md",
+				"src/lib/components/breadcrumb/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "button",
+			"kind": "component",
 			"title": "Button",
 			"description": "The primary action control. Renders a `<button>` by default, or an `<a>` when `href` is given, with identical styling in both cases. Five visual variants × three tones × three sizes cover every button in a typical app without custom CSS.",
 			"files": [
@@ -71,7 +122,39 @@
 			"external": []
 		},
 		{
+			"name": "button-group",
+			"kind": "component",
+			"title": "ButtonGroup",
+			"description": "Lays out related buttons as one unit: a segmented set of options, a split action, or a toolbar row. Attached groups collapse the inner radii so outlines read as a single bar.",
+			"files": [
+				"src/lib/components/button-group/ButtonGroup.svelte",
+				"src/lib/components/button-group/README.md",
+				"src/lib/components/button-group/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "calendar",
+			"kind": "component",
+			"title": "Calendar",
+			"description": "A month grid you can read as well as pick from: each day carries up to three coloured dots — journal entries, sessions, spending — so the month tells its story before anything is clicked. Values are ISO date strings (`YYYY-MM-DD`), never `Date` objects, so the app's dates pass straight through. Built on Bits UI's Calendar; DatePicker shares the same grid.",
+			"files": [
+				"src/lib/components/calendar/Calendar.svelte",
+				"src/lib/components/calendar/CalendarBody.svelte",
+				"src/lib/components/calendar/README.md",
+				"src/lib/components/calendar/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui",
+				"@internationalized/date",
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "card",
+			"kind": "component",
 			"title": "Card",
 			"description": "A surface that groups related content. Three variants (outlined, elevated, filled), optional header and footer rows, and an interactive mode for clickable cards.",
 			"files": [
@@ -84,6 +167,7 @@
 		},
 		{
 			"name": "checkbox",
+			"kind": "component",
 			"title": "Checkbox",
 			"description": "A native checkbox with a custom box. Supports an indeterminate state for \"select all\" and an optional description line.",
 			"files": [
@@ -97,7 +181,26 @@
 			"external": []
 		},
 		{
+			"name": "combobox",
+			"kind": "component",
+			"title": "Combobox",
+			"description": "A text input that filters a list as you type — for long or searchable lists where Select's fixed menu would be tedious. `multiple` turns it into a multi-select with removable chips. Built on Bits UI's Combobox; integrates with Field like Input.",
+			"files": [
+				"src/lib/components/combobox/Combobox.svelte",
+				"src/lib/components/combobox/README.md",
+				"src/lib/components/combobox/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": [
+				"bits-ui",
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "container",
+			"kind": "component",
 			"title": "Container",
 			"description": "Centres content with a max width from the `--container-*` scale and page-level horizontal padding.",
 			"files": [
@@ -109,7 +212,69 @@
 			"external": []
 		},
 		{
+			"name": "court-map",
+			"kind": "component",
+			"title": "CourtMap",
+			"description": "A padel court drawn to scale — 10 m × 20 m, net across the middle, service lines 6.95 m from it, glass as a soft frame — that you tap to place a point and drag to move it. Coordinates are **court metres** (`x` 0–10 across, `y` 0–20 down, your side the bottom half), never pixels, so a season of moments reads as one heat map whatever screen logged them. One component serves the three padel views: logging a moment (edit), reading a session (view), and revising a month of mistakes (view + `heat`).",
+			"files": [
+				"src/lib/components/court-map/CourtMap.svelte",
+				"src/lib/components/court-map/README.md",
+				"src/lib/components/court-map/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "date-picker",
+			"kind": "component",
+			"title": "DatePicker",
+			"description": "A date field you can type into segment by segment (day, month, year, each its own focus stop) with a calendar pop-up for when you would rather look. Values are ISO strings (`YYYY-MM-DD`). The pop-up is the same grid as Calendar, marks and all. Built on Bits UI's DatePicker.",
+			"files": [
+				"src/lib/components/date-picker/DatePicker.svelte",
+				"src/lib/components/date-picker/README.md",
+				"src/lib/components/date-picker/index.ts"
+			],
+			"dependencies": [
+				"calendar",
+				"field"
+			],
+			"external": [
+				"bits-ui",
+				"@lucide/svelte",
+				"@internationalized/date"
+			]
+		},
+		{
+			"name": "delta",
+			"kind": "component",
+			"title": "Delta",
+			"description": "A signed change — `+3.46%`, `−$1,250.00` — coloured by whether it is good or bad, with an arrow and a screen-reader direction. `invert` handles metrics where up is bad (costs, latency, drawdown).",
+			"files": [
+				"src/lib/components/delta/Delta.svelte",
+				"src/lib/components/delta/README.md",
+				"src/lib/components/delta/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "description-list",
+			"kind": "component",
+			"title": "DescriptionList",
+			"description": "Term–description pairs: the facts about one record (a session's venue, duration, partner, result), a settings summary, the \"This Daybook\" block on a system page. Three layouts from one `items` array: stacked for narrow places, inline rows for scanning, a columns grid for a facts panel. Descriptions take a string or a snippet.",
+			"files": [
+				"src/lib/components/description-list/DescriptionList.svelte",
+				"src/lib/components/description-list/README.md",
+				"src/lib/components/description-list/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
 			"name": "dialog",
+			"kind": "component",
 			"title": "Dialog",
 			"description": "A modal window built on Bits UI's Dialog: focus is trapped, the page behind is inert and scroll-locked, Escape and overlay clicks close it (unless `dismissible={false}`), and focus returns to the trigger on close.",
 			"files": [
@@ -125,6 +290,7 @@
 		},
 		{
 			"name": "divider",
+			"kind": "component",
 			"title": "Divider",
 			"description": "A hairline separator, horizontal or vertical, with an optional centred label.",
 			"files": [
@@ -136,7 +302,37 @@
 			"external": []
 		},
 		{
+			"name": "drawer",
+			"kind": "component",
+			"title": "Drawer",
+			"description": "A panel that slides in from an edge of the viewport — filters, detail views, settings, mobile navigation. It is a modal dialog (focus trap, scroll lock) built on Bits UI's Dialog, so everything that applies to Dialog applies here.",
+			"files": [
+				"src/lib/components/drawer/Drawer.svelte",
+				"src/lib/components/drawer/README.md",
+				"src/lib/components/drawer/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui",
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "empty-state",
+			"kind": "component",
+			"title": "EmptyState",
+			"description": "What a list, table or page shows when there is nothing in it yet: a title, an explanation and the action that fills it. Use it inside Table's `empty` snippet, a Card, or a full page.",
+			"files": [
+				"src/lib/components/empty-state/EmptyState.svelte",
+				"src/lib/components/empty-state/README.md",
+				"src/lib/components/empty-state/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
 			"name": "field",
+			"kind": "component",
 			"title": "Field",
 			"description": "Wraps a form control with a label, optional hint and error message, and wires the accessibility attributes for you: the label's `for`, the control's `aria-describedby`, `aria-invalid`, `required` and `disabled` all flow through context.",
 			"files": [
@@ -150,6 +346,7 @@
 		},
 		{
 			"name": "grid",
+			"kind": "component",
 			"title": "Grid",
 			"description": "CSS grid with two modes: a fixed column count, or responsive auto-fit columns with a minimum width. Both keep a token-driven gap.",
 			"files": [
@@ -162,6 +359,7 @@
 		},
 		{
 			"name": "heading",
+			"kind": "component",
 			"title": "Heading",
 			"description": "Semantic heading (h1–h6) in the theme's display face. Visual size is decoupled from the level so document outlines stay correct while the design does what it needs.",
 			"files": [
@@ -174,6 +372,7 @@
 		},
 		{
 			"name": "inline",
+			"kind": "component",
 			"title": "Inline",
 			"description": "Horizontal flex layout that wraps by default. Use for button rows, tag clouds, toolbars and metadata lines.",
 			"files": [
@@ -186,6 +385,7 @@
 		},
 		{
 			"name": "input",
+			"kind": "component",
 			"title": "Input",
 			"description": "Single-line text input with optional leading/trailing adornments. Reads label, hint, error, required and disabled from a surrounding Field.",
 			"files": [
@@ -199,7 +399,36 @@
 			"external": []
 		},
 		{
+			"name": "kbd",
+			"kind": "component",
+			"title": "Kbd",
+			"description": "Keyboard keys and shortcuts, rendered as keycaps. Pass a shortcut string and it is split into keys with platform-aware glyphs (`mod` becomes ⌘ on Apple devices and Ctrl elsewhere).",
+			"files": [
+				"src/lib/components/kbd/Kbd.svelte",
+				"src/lib/components/kbd/README.md",
+				"src/lib/components/kbd/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "link",
+			"kind": "component",
+			"title": "Link",
+			"description": "An inline text link. Use it inside prose and tables; use `Button` with `href` for call-to-action links that should look like buttons.",
+			"files": [
+				"src/lib/components/link/Link.svelte",
+				"src/lib/components/link/README.md",
+				"src/lib/components/link/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "menu",
+			"kind": "component",
 			"title": "Menu",
 			"description": "A dropdown menu of actions, built on Bits UI's DropdownMenu: arrow-key navigation, typeahead, focus return and dismissal are handled for you. Compose it from `Menu`, `MenuItem`, `MenuCheckboxItem`, `MenuGroup` and `MenuSeparator`.",
 			"files": [
@@ -217,7 +446,40 @@
 			]
 		},
 		{
+			"name": "number-input",
+			"kind": "component",
+			"title": "NumberInput",
+			"description": "A numeric field with step buttons, keyboard stepping and locale-aware formatting. Use it for quantities, prices, percentages and sizes — anywhere a plain `<input type=\"number\">` would be too loose (it accepts `e`, ignores formatting and looks different in every browser). Editing shows the plain number; on blur the committed value is displayed with grouping, a currency symbol or a percent sign. For free text that happens to contain digits (phone numbers, card numbers, postcodes) use `Input` with `numeric` instead.",
+			"files": [
+				"src/lib/components/number-input/NumberInput.svelte",
+				"src/lib/components/number-input/README.md",
+				"src/lib/components/number-input/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "pagination",
+			"kind": "component",
+			"title": "Pagination",
+			"description": "Page controls for long lists and tables. The number of slots stays constant as the page changes, so the control never jumps in width.",
+			"files": [
+				"src/lib/components/pagination/Pagination.svelte",
+				"src/lib/components/pagination/README.md",
+				"src/lib/components/pagination/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "popover",
+			"kind": "component",
 			"title": "Popover",
 			"description": "A floating panel anchored to its trigger, for filters, pickers, small forms and previews. Positioning, collision avoidance, focus management and dismissal come from Bits UI.",
 			"files": [
@@ -231,7 +493,21 @@
 			]
 		},
 		{
+			"name": "progress",
+			"kind": "component",
+			"title": "Progress",
+			"description": "A horizontal bar for determinate progress (0–100) or an indeterminate sweep while the length of a task is unknown. For an inline \"working…\" indicator use Spinner.",
+			"files": [
+				"src/lib/components/progress/Progress.svelte",
+				"src/lib/components/progress/README.md",
+				"src/lib/components/progress/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
 			"name": "radio",
+			"kind": "component",
 			"title": "Radio & RadioGroup",
 			"description": "Single choice from a small set. `RadioGroup` owns the value, name, label, hint and error; `Radio` renders one option and reads the group through context.",
 			"files": [
@@ -245,7 +521,23 @@
 			"external": []
 		},
 		{
+			"name": "rating",
+			"kind": "component",
+			"title": "Rating",
+			"description": "A 1-to-_n_ rating entered as a row of numbered segments — value, confidence, effort, energy, mood. Numbers rather than stars, because a \"3\" means the same thing on every scale and the step labels say what it means. One tap sets, tapping the current step clears, and the whole thing is one tab stop.",
+			"files": [
+				"src/lib/components/rating/README.md",
+				"src/lib/components/rating/Rating.svelte",
+				"src/lib/components/rating/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": []
+		},
+		{
 			"name": "select",
+			"kind": "component",
 			"title": "Select",
 			"description": "A single-choice dropdown built on Bits UI's Select, styled to match Input. Takes a flat `items` array (optionally grouped), works inside Field, and submits through a hidden input when given a `name`.",
 			"files": [
@@ -263,6 +555,7 @@
 		},
 		{
 			"name": "skeleton",
+			"kind": "component",
 			"title": "Skeleton",
 			"description": "Loading placeholder that mirrors the shape of the content it stands in for. Hidden from assistive technology; announce loading with `aria-busy` on the region instead.",
 			"files": [
@@ -274,7 +567,25 @@
 			"external": []
 		},
 		{
+			"name": "slider",
+			"kind": "component",
+			"title": "Slider",
+			"description": "Pick a number, or a range, by dragging along a track. Built on Bits UI's Slider for pointer, keyboard and touch handling. Use Input with `type=\"number\"` when the exact value matters more than the gesture.",
+			"files": [
+				"src/lib/components/slider/README.md",
+				"src/lib/components/slider/Slider.svelte",
+				"src/lib/components/slider/index.ts"
+			],
+			"dependencies": [
+				"field"
+			],
+			"external": [
+				"bits-ui"
+			]
+		},
+		{
 			"name": "spinner",
+			"kind": "component",
 			"title": "Spinner",
 			"description": "Indeterminate loading indicator. Inherits `currentColor` and scales with font size, so it drops into buttons, inputs and text without configuration.",
 			"files": [
@@ -287,6 +598,7 @@
 		},
 		{
 			"name": "stack",
+			"kind": "component",
 			"title": "Stack",
 			"description": "Vertical flex layout with a token-driven gap. The default way to space things top-to-bottom; reach for it before writing `margin`.",
 			"files": [
@@ -298,7 +610,24 @@
 			"external": []
 		},
 		{
+			"name": "stat",
+			"kind": "component",
+			"title": "Stat",
+			"description": "A KPI tile: a label, a big number, an optional delta and hint, and room for a sparkline or progress bar underneath. Lay several out in a `Grid` at the top of a dashboard.",
+			"files": [
+				"src/lib/components/stat/README.md",
+				"src/lib/components/stat/Stat.svelte",
+				"src/lib/components/stat/index.ts"
+			],
+			"dependencies": [
+				"delta",
+				"skeleton"
+			],
+			"external": []
+		},
+		{
 			"name": "switch",
+			"kind": "component",
 			"title": "Switch",
 			"description": "An on/off toggle for settings that take effect immediately. Use a Checkbox instead when the choice is submitted with a form.",
 			"files": [
@@ -312,7 +641,23 @@
 			"external": []
 		},
 		{
+			"name": "table",
+			"kind": "component",
+			"title": "Table",
+			"description": "A data table driven by a column definition: sortable headers, numeric columns with tabular figures, custom cell snippets, clickable rows and an empty state. Sorting is client-side by default; pass `onSort` to take over (server-side paging, large data).",
+			"files": [
+				"src/lib/components/table/README.md",
+				"src/lib/components/table/Table.svelte",
+				"src/lib/components/table/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "tabs",
+			"kind": "component",
 			"title": "Tabs",
 			"description": "Switch between sections of related content. Built on Bits UI's Tabs for roving focus and ARIA wiring; compose it from `Tabs`, `TabList`, `Tab` and `TabPanel`.",
 			"files": [
@@ -330,7 +675,23 @@
 			]
 		},
 		{
+			"name": "tag",
+			"kind": "component",
+			"title": "Tag",
+			"description": "A pill for user-controlled labels: filter chips, selected options, categories on an item. It can be static, removable (`onRemove`), or a toggle (`onSelect`). For read-only status use Badge.",
+			"files": [
+				"src/lib/components/tag/README.md",
+				"src/lib/components/tag/Tag.svelte",
+				"src/lib/components/tag/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
 			"name": "text",
+			"kind": "component",
 			"title": "Text",
 			"description": "Body text with size, weight and tone from tokens. Also handles the recurring needs of application text: tabular numerals, truncation and line clamping.",
 			"files": [
@@ -343,6 +704,7 @@
 		},
 		{
 			"name": "textarea",
+			"kind": "component",
 			"title": "Textarea",
 			"description": "Multi-line text input. Optional auto-resize grows with content instead of scrolling.",
 			"files": [
@@ -356,7 +718,38 @@
 			"external": []
 		},
 		{
+			"name": "ticker",
+			"kind": "component",
+			"title": "Ticker",
+			"description": "A continuously scrolling strip of labelled figures — the market tape. Use it for a watchlist, headline rates, or any short list of live numbers that should be glanceable without taking vertical space. It is a `role=\"marquee\"` region with a pause button (WCAG 2.2.2), pauses on hover and focus, and under `prefers-reduced-motion` it stops entirely and becomes a plain horizontally scrollable row. Values that change flash briefly so movement is visible without a chart. For a list the user must read fully, use `Table` instead.",
+			"files": [
+				"src/lib/components/ticker/README.md",
+				"src/lib/components/ticker/Ticker.svelte",
+				"src/lib/components/ticker/index.ts"
+			],
+			"dependencies": [
+				"delta"
+			],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "time-grid",
+			"kind": "component",
+			"title": "TimeGrid",
+			"description": "A week (or any run of days) as hours down the side and sessions as blocks — the view a coach plans a week in. Overlapping blocks share the column side by side, a red line marks now, and a tap on empty space says which day and time it landed on so the caller can add something there. Times are instants and are shown in the browser's zone; the caller decides how many days to show (seven on a desktop, three on a phone). Dependency-free.",
+			"files": [
+				"src/lib/components/time-grid/README.md",
+				"src/lib/components/time-grid/TimeGrid.svelte",
+				"src/lib/components/time-grid/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
 			"name": "toast",
+			"kind": "component",
 			"title": "Toast",
 			"description": "Transient notifications. Call `toast()` from anywhere (components, load functions, stores) and render one `<Toaster />` near the root of the app. Toasts auto-dismiss, pause while hovered or focused, and are announced through a polite live region.",
 			"files": [
@@ -372,6 +765,7 @@
 		},
 		{
 			"name": "tooltip",
+			"kind": "component",
 			"title": "Tooltip",
 			"description": "A short label shown on hover or keyboard focus. For icon-only buttons and truncated text — never for content the user needs to act on.",
 			"files": [
@@ -383,6 +777,129 @@
 			"external": [
 				"bits-ui"
 			]
+		},
+		{
+			"name": "virtual-list",
+			"kind": "component",
+			"title": "VirtualList",
+			"description": "A scrolling list that renders only the rows in view (plus a small overscan), so a list of ten thousand items costs the same as one of twenty. Rows are absolutely positioned inside a track sized to the whole list, so the scrollbar is honest and `scrollToIndex` is exact. Row heights are fixed by default (`itemHeight`); with `measure` each rendered row is measured and later rows shift accordingly. Dependency-free. For columns, headers and sorting use `Table`; for very long tables use the DataTable layer, which is built on this.",
+			"files": [
+				"src/lib/components/virtual-list/README.md",
+				"src/lib/components/virtual-list/VirtualList.svelte",
+				"src/lib/components/virtual-list/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "app-shell",
+			"kind": "flow",
+			"title": "AppShell",
+			"description": "The frame of an application, built as layered surfaces: a canvas behind everything, the navigation sidebar living directly on it, and the page as a rounded surface floating above. The header is transparent until content scrolls beneath it, then turns frosted. On wide screens the sidebar collapses to an icon rail; on narrow ones it becomes an off-canvas drawer. Each theme expresses the layering its own way — slate with hairlines and a soft tint, folio with paper-on-linen shadows and pill navigation, terminal with bordered panels and a rail indicator — through the `--shell-*` tokens.",
+			"files": [
+				"src/lib/flow/app-shell/AppShell.svelte",
+				"src/lib/flow/app-shell/NavHost.svelte",
+				"src/lib/flow/app-shell/README.md",
+				"src/lib/flow/app-shell/context.ts",
+				"src/lib/flow/app-shell/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "command-palette",
+			"kind": "flow",
+			"title": "CommandPalette",
+			"description": "A ⌘K launcher: one shortcut opens a searchable list of everything the user can do — navigate, create, toggle settings — grouped and filtered as they type. Built on Bits UI's Command inside a Dialog. Give it the app's actions once, in the root layout, and every screen gets keyboard-first navigation.",
+			"files": [
+				"src/lib/flow/command-palette/CommandPalette.svelte",
+				"src/lib/flow/command-palette/README.md",
+				"src/lib/flow/command-palette/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"bits-ui",
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "nav",
+			"kind": "flow",
+			"title": "Nav",
+			"description": "Navigation for the AppShell, vertical (sidebar) or horizontal (top bar): sections with headings, items with icons, badges and active state derived from the current URL, and one accent indicator that slides between active items. Inside a collapsed shell the items become icons (or letter monograms) with tooltips and section headings turn into hairlines.",
+			"files": [
+				"src/lib/flow/nav/Nav.svelte",
+				"src/lib/flow/nav/NavItem.svelte",
+				"src/lib/flow/nav/NavSection.svelte",
+				"src/lib/flow/nav/README.md",
+				"src/lib/flow/nav/context.ts",
+				"src/lib/flow/nav/index.ts"
+			],
+			"dependencies": [
+				"app-shell"
+			],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "page-transition",
+			"kind": "flow",
+			"title": "PageTransition",
+			"description": "Two ways to animate between screens.",
+			"files": [
+				"src/lib/flow/page-transition/PageTransition.svelte",
+				"src/lib/flow/page-transition/README.md",
+				"src/lib/flow/page-transition/index.ts",
+				"src/lib/flow/page-transition/view-transition.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@ethan/designbook"
+			]
+		},
+		{
+			"name": "route-progress",
+			"kind": "flow",
+			"title": "RouteProgress",
+			"description": "A thin bar along the top of the viewport that trickles while a navigation is in flight and completes when it lands — the cue that a click did something on a slow route. Render one in the root layout and drive it from SvelteKit's `navigating` state (or any boolean: a fetch, a form submit).",
+			"files": [
+				"src/lib/flow/route-progress/README.md",
+				"src/lib/flow/route-progress/RouteProgress.svelte",
+				"src/lib/flow/route-progress/index.ts"
+			],
+			"dependencies": [],
+			"external": []
+		},
+		{
+			"name": "stepper",
+			"kind": "flow",
+			"title": "Stepper",
+			"description": "Shows where the user is in a multi-step flow — onboarding, checkout, an order ticket — and lets them jump back to completed steps. Pair it with `<PageTransition>` for the step bodies.",
+			"files": [
+				"src/lib/flow/stepper/README.md",
+				"src/lib/flow/stepper/Stepper.svelte",
+				"src/lib/flow/stepper/index.ts"
+			],
+			"dependencies": [],
+			"external": [
+				"@lucide/svelte"
+			]
+		},
+		{
+			"name": "tab-bar",
+			"kind": "flow",
+			"title": "TabBar",
+			"description": "Bottom navigation for phones: three to five sections, each an icon over a short label, one thumb-tap away. It sits fixed to the bottom edge (respecting the home-indicator safe area), is hidden at the sidebar breakpoint (≥ 64rem) where `AppShell`'s sidebar takes over, and derives the active item from the current path the same way `Nav` does. Give `AppShell` the `tabBar` snippet and it keeps the main area clear of it. Dependency-free.",
+			"files": [
+				"src/lib/flow/tab-bar/README.md",
+				"src/lib/flow/tab-bar/TabBar.svelte",
+				"src/lib/flow/tab-bar/index.ts"
+			],
+			"dependencies": [],
+			"external": []
 		}
 	]
 }

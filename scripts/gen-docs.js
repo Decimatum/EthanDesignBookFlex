@@ -7,14 +7,25 @@ import { readdirSync, readFileSync, writeFileSync, existsSync, statSync } from '
 import { join, relative } from 'node:path';
 
 const root = process.cwd();
-const componentsDir = join(root, 'src/lib/components');
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 
-const components = readdirSync(componentsDir)
-	.filter((name) => statSync(join(componentsDir, name)).isDirectory())
-	.sort()
-	.map((name) => {
-		const dir = join(componentsDir, name);
+/** Component folders live under components/ (UI) and flow/ (app patterns). */
+const sources = [
+	{ kind: 'component', base: 'src/lib/components' },
+	{ kind: 'flow', base: 'src/lib/flow' }
+];
+
+const components = sources
+	.flatMap(({ kind, base }) => {
+		const baseDir = join(root, base);
+		if (!existsSync(baseDir)) return [];
+		return readdirSync(baseDir)
+			.filter((name) => statSync(join(baseDir, name)).isDirectory())
+			.sort()
+			.map((name) => ({ kind, base, name }));
+	})
+	.map(({ kind, base, name }) => {
+		const dir = join(root, base, name);
 		const readmePath = join(dir, 'README.md');
 		const readme = existsSync(readmePath) ? readFileSync(readmePath, 'utf8') : '';
 		const title = readme.match(/^#\s+(.+)$/m)?.[1] ?? name;
@@ -44,7 +55,7 @@ const components = readdirSync(componentsDir)
 			)
 		];
 
-		return { name, title, description, files, dependencies: internal, external };
+		return { name, kind, title, description, files, dependencies: internal, external };
 	});
 
 // ---- registry.json ----
@@ -82,8 +93,12 @@ const lines = [
 	'## Components',
 	''
 ];
-for (const c of components) {
+for (const c of components.filter((c) => c.kind === 'component')) {
 	lines.push(`- [${c.title}](src/lib/components/${c.name}/README.md): ${c.description}`);
+}
+lines.push('', '## Flow (app patterns)', '');
+for (const c of components.filter((c) => c.kind === 'flow')) {
+	lines.push(`- [${c.title}](src/lib/flow/${c.name}/README.md): ${c.description}`);
 }
 lines.push(
 	'',

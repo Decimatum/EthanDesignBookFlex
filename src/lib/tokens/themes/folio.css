@@ -27,7 +27,7 @@
 	--n-7-dark: oklch(38% 0.02 65);
 	--n-8-dark: oklch(46% 0.022 65);
 	--n-9-dark: oklch(55% 0.024 65);
-	--n-10-dark: oklch(60% 0.024 65);
+	--n-10-dark: oklch(63% 0.024 65);
 	--n-11-dark: oklch(75% 0.02 68);
 	--n-12-dark: oklch(95% 0.012 75);
 
@@ -82,4 +82,20 @@
 	--shadow-md: 0 6px 18px oklch(30% 0.03 60 / 0.1), 0 2px 4px oklch(30% 0.03 60 / 0.05);
 	--shadow-lg: 0 16px 40px oklch(30% 0.03 60 / 0.16), 0 4px 10px oklch(30% 0.03 60 / 0.06);
 	--leading-normal: 1.6;
+
+	/* App shell — paper on linen: a warm tinted sidebar, a soft-shadowed page floating on it */
+	--shell-canvas: var(--n-3);
+	--shell-sidebar-bg: transparent;
+	--shell-surface-border: transparent;
+	--shell-surface-shadow: var(--shadow-md);
+	--shell-radius: var(--radius-xl);
+	--shell-gap: var(--space-4);
+	--shell-header-bg: color-mix(in srgb, var(--n-3) 80%, transparent);
+	--shell-nav-hover-bg: color-mix(in srgb, var(--n-12) 5%, transparent);
+	--shell-nav-active-bg: var(--n-1);
+	--shell-nav-active-fg: var(--n-12);
+	--shell-nav-indicator-w: 0px;
+	--shell-nav-underline-h: 0px;
+	--shell-nav-active-bg-h: var(--n-1);
+	--shell-nav-radius: var(--radius-full);
 }

@@ -1,15 +1,16 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import { allRoutes } from '../src/docs/nav.js';
+import { a11yRoutes } from './routes.js';
 
 /**
  * Every docs page is scanned with axe in every theme × scheme combination.
- * Adding a page to src/docs/nav.ts automatically adds it here.
+ * Adding a page to src/docs/nav.ts automatically adds it here. Run a subset with E2E_ROUTES
+ * (see routes.ts) — axe is DOM-level and produces no files, so the full run is cheap to keep.
  */
 const themes = ['slate', 'folio', 'terminal'] as const;
 const schemes = ['light', 'dark'] as const;
 
-for (const route of allRoutes) {
+for (const route of a11yRoutes) {
 	for (const theme of themes) {
 		for (const scheme of schemes) {
 			test(`@a11y ${route} [${theme}/${scheme}]`, async ({ page }) => {

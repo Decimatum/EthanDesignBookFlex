@@ -66,6 +66,9 @@
 			timers.set(c.id, { seq: c.seq, remaining: c.duration, started: 0 });
 			if (!paused) start(c.id);
 		}
+		return () => {
+			for (const id of timers.keys()) stop(id);
+		};
 	});
 
 	$effect(() => {
@@ -86,15 +89,21 @@
 		if (!(e.currentTarget as HTMLElement).contains(e.relatedTarget as Node)) paused = false;
 	}}
 >
-	<!-- Live region announces new toasts without moving focus -->
-	<div class="sr-only" aria-live="polite" aria-atomic="false">
-		{#each toasts.items as t (t.id)}<p>
+	<!-- Two live regions announce toasts without moving focus; the visible cards carry no live
+	     role so nothing is read twice. Danger interrupts (assertive), everything else waits. -->
+	<div class="sr-only" role="status" aria-live="polite" aria-atomic="false">
+		{#each toasts.items.filter((t) => t.tone !== 'danger') as t (t.id)}<p>
+				{t.title}{t.description ? `. ${t.description}` : ''}
+			</p>{/each}
+	</div>
+	<div class="sr-only" role="alert" aria-live="assertive" aria-atomic="false">
+		{#each toasts.items.filter((t) => t.tone === 'danger') as t (t.id)}<p>
 				{t.title}{t.description ? `. ${t.description}` : ''}
 			</p>{/each}
 	</div>
 	{#each toasts.items as item (item.id)}
 		{@const Icon = icons[item.tone]}
-		<div class="db-toast" data-tone={item.tone} role={item.tone === 'danger' ? 'alert' : 'status'}>
+		<div class="db-toast" data-tone={item.tone}>
 			{#if item.icon || Icon}
 				<span class="db-toast__icon" aria-hidden="true">
 					{#if item.icon}{@render item.icon()}{:else if Icon}<Icon />{/if}

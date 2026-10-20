@@ -35,13 +35,9 @@
 		...rest
 	}: AvatarProps = $props();
 
-	let failed = $state(false);
-	// A new src deserves a fresh attempt.
-	$effect(() => {
-		void src;
-		failed = false;
-	});
-	const showImage = $derived(Boolean(src) && !failed);
+	// Remember which src failed so a new src gets a fresh attempt without an effect.
+	let failedSrc = $state<string | undefined>();
+	const showImage = $derived(Boolean(src) && failedSrc !== src);
 	// Deterministic hue from the name so the same person always gets the same colour.
 	const hue = $derived.by(() => {
 		let h = 0;
@@ -60,7 +56,7 @@
 	style:--_hue={hue}
 >
 	{#if showImage}
-		<img class="db-avatar__img" {src} alt="" onerror={() => (failed = true)} />
+		<img class="db-avatar__img" {src} alt="" onerror={() => (failedSrc = src)} />
 	{:else}
 		<span class="db-avatar__initials" aria-hidden="true">{initials(name)}</span>
 	{/if}

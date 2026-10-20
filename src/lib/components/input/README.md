@@ -37,10 +37,11 @@ All other props are forwarded to the native `<input>`.
 
 ## Snippets
 
-| Snippet    | Description          |
-| ---------- | -------------------- |
-| `leading`  | Icon or text before. |
-| `trailing` | Icon or text after.  |
+| Snippet    | Description                                                                                                                                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `leading`  | Icon or text before.                                                                                                                                                                                                     |
+| `trailing` | Icon or text after.                                                                                                                                                                                                      |
+| `action`   | An interactive control after the value (clear, show/hide password). Not `aria-hidden`; a plain `<button type="button">` inside is styled as a compact, borderless button — give it an `aria-label` when it is icon-only. |
 
 ## Keyboard
 

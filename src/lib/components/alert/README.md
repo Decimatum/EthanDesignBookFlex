@@ -17,14 +17,15 @@ An inline message that stays in the page: status, warnings, errors, or context t
 
 ## Props
 
-| Prop          | Type                                                        | Default  | Description                                    |
-| ------------- | ----------------------------------------------------------- | -------- | ---------------------------------------------- |
-| `tone`        | `'info' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'info'` |                                                |
-| `title`       | `string`                                                    | —        | Bold first line.                               |
-| `dismissible` | `boolean`                                                   | `false`  | Adds a close button; the alert removes itself. |
-| `onDismiss`   | `() => void`                                                | —        |                                                |
-| `icon`        | `Snippet \| null`                                           | by tone  | Replace the icon, or `null` to hide it.        |
-| `class`       | `string`                                                    | —        |                                                |
+| Prop          | Type                                                        | Default  | Description                                                   |
+| ------------- | ----------------------------------------------------------- | -------- | ------------------------------------------------------------- |
+| `tone`        | `'info' \| 'success' \| 'warning' \| 'danger' \| 'neutral'` | `'info'` |                                                               |
+| `title`       | `string`                                                    | —        | Bold first line.                                              |
+| `dismissible` | `boolean`                                                   | `false`  | Adds a close button; the alert removes itself.                |
+| `open`        | `boolean`                                                   | `true`   | Bindable visibility, so a dismissed alert can be shown again. |
+| `onDismiss`   | `() => void`                                                | —        |                                                               |
+| `icon`        | `Snippet \| null`                                           | by tone  | Replace the icon, or `null` to hide it.                       |
+| `class`       | `string`                                                    | —        |                                                               |
 
 All other props are forwarded to the root element.
 

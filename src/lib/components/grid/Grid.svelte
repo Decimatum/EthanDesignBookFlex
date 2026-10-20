@@ -61,6 +61,10 @@
 	.db-grid {
 		display: grid;
 		min-width: 0;
+		/* Definite width. As a flex item without it (e.g. in a centre-aligned flex row), Chrome sized
+		   `min` grids' rows during the intrinsic pass as if there were one column, so every row came
+		   out N× too tall. */
+		width: 100%;
 	}
 	ul.db-grid,
 	ol.db-grid {

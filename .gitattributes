@@ -1,2 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Screenshot baselines are binary; never normalise or diff them.
+*.png binary

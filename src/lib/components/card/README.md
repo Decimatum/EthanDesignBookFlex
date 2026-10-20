@@ -19,14 +19,14 @@ A surface that groups related content. Three variants (outlined, elevated, fille
 
 ## Props
 
-| Prop          | Type                                             | Default      | Description                                      |
-| ------------- | ------------------------------------------------ | ------------ | ------------------------------------------------ |
-| `as`          | `'div' \| 'section' \| 'article' \| 'li' \| 'a'` | `'div'`      | Element (becomes `a` automatically with `href`). |
-| `variant`     | `'outlined' \| 'elevated' \| 'filled'`           | `'outlined'` |                                                  |
-| `padding`     | `'none' \| 'sm' \| 'md' \| 'lg'`                 | `'md'`       | Inner padding; `none` for edge-to-edge content.  |
-| `interactive` | `boolean`                                        | `false`      | Hover/focus affordance. Implied by `href`.       |
-| `href`        | `string`                                         | —            | Render as a link.                                |
-| `class`       | `string`                                         | —            |                                                  |
+| Prop          | Type                                             | Default      | Description                                                                                                     |
+| ------------- | ------------------------------------------------ | ------------ | --------------------------------------------------------------------------------------------------------------- |
+| `as`          | `'div' \| 'section' \| 'article' \| 'li' \| 'a'` | `'div'`      | Element (becomes `a` automatically with `href`).                                                                |
+| `variant`     | `'outlined' \| 'elevated' \| 'filled'`           | `'outlined'` |                                                                                                                 |
+| `padding`     | `'none' \| 'sm' \| 'md' \| 'lg'`                 | `'md'`       | Inner padding; `none` for edge-to-edge content.                                                                 |
+| `interactive` | `boolean`                                        | `false`      | Hover/focus affordance. Implied by `href`. Without `href` the card becomes a keyboard-operable `role="button"`. |
+| `href`        | `string`                                         | —            | Render as a link.                                                                                               |
+| `class`       | `string`                                         | —            |                                                                                                                 |
 
 All other props are forwarded to the root element.
 
@@ -48,6 +48,7 @@ All other props are forwarded to the root element.
 ## Accessibility
 
 - A card with `href` is a single link; keep interactive children out of it (nested interactive elements are invalid).
+- `interactive` without `href` adds `role="button"`, `tabindex="0"` and Enter/Space activation of your `onclick`. Pass your own `role`/`tabindex` to override.
 - Use `as="article"` or `as="section"` with a heading for content cards so the outline stays meaningful.
 
 ## Tokens used

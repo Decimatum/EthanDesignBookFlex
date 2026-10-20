@@ -1,0 +1,6 @@
+/* Applied only while capturing content baselines (see visual.e2e.ts). The sticky shell
+ * header would overlap the top of the element capture in its scrolled (frosted) state;
+ * the shell itself is baselined by the full-page shell-* captures. */
+.db-app-shell__header {
+	visibility: hidden !important;
+}

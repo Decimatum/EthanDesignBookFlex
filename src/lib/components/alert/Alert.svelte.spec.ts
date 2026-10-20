@@ -22,6 +22,11 @@ describe('Alert', () => {
 		expect(a.container.querySelector('.db-alert')).toHaveAttribute('role', 'alert');
 	});
 
+	it('lets an explicit role override the derived one', () => {
+		const a = render(Alert, { tone: 'danger', role: 'note', children: body });
+		expect(a.container.querySelector('.db-alert')).toHaveAttribute('role', 'note');
+	});
+
 	it('can be dismissed and hides its icon on request', async () => {
 		const onDismiss = vi.fn();
 		const screen = render(Alert, { dismissible: true, onDismiss, icon: null, children: body });

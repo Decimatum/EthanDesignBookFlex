@@ -66,22 +66,33 @@ export function applyTheme(
 
 class ThemeState {
 	#settings = $state<ThemeSettings>(readFromDocument());
+	/** OS preference, kept live so `resolvedScheme` re-evaluates when the system flips. */
+	#osDark = $state(false);
+
+	constructor() {
+		if (!isBrowser || typeof window.matchMedia !== 'function') return;
+		const mq = window.matchMedia('(prefers-color-scheme: dark)');
+		this.#osDark = mq.matches;
+		mq.addEventListener('change', (e) => (this.#osDark = e.matches));
+	}
 
 	/** Current settings (reactive). */
 	get current(): ThemeSettings {
 		return this.#settings;
 	}
 
-	/** Resolved scheme: turns 'auto' into 'light' | 'dark' using the OS preference. */
+	/** Resolved scheme: turns 'auto' into 'light' | 'dark' using the (live) OS preference. */
 	get resolvedScheme(): 'light' | 'dark' {
 		const s = this.#settings.scheme;
 		if (s !== 'auto') return s;
-		if (!isBrowser) return 'light';
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		return this.#osDark ? 'dark' : 'light';
 	}
 
 	/** Update one or more axes; applies to <html> and persists. */
 	set(partial: Partial<ThemeSettings>, { persist = true } = {}) {
+		// The singleton is module-scoped: on the server it must stay inert so one request's
+		// settings never leak into another's render.
+		if (!isBrowser) return;
 		this.#settings = { ...this.#settings, ...partial };
 		applyTheme(this.#settings);
 		if (persist && isBrowser) {

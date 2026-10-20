@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
+import { userEvent } from 'vitest/browser';
 import { render } from 'vitest-browser-svelte';
 import { createRawSnippet } from 'svelte';
 import Card from './Card.svelte';
@@ -28,5 +29,17 @@ describe('Card', () => {
 		const link = screen.getByRole('link');
 		await expect.element(link).toHaveAttribute('href', '/x');
 		await expect.element(link).toHaveAttribute('data-interactive');
+	});
+
+	it('is a keyboard-operable button when interactive without href', async () => {
+		const onclick = vi.fn();
+		const screen = render(Card, { interactive: true, onclick, children: body });
+		const btn = screen.getByRole('button');
+		await expect.element(btn).toHaveAttribute('tabindex', '0');
+		(btn.element() as HTMLElement).focus();
+		await userEvent.keyboard('{Enter}');
+		expect(onclick).toHaveBeenCalledTimes(1);
+		await userEvent.keyboard(' ');
+		expect(onclick).toHaveBeenCalledTimes(2);
 	});
 });

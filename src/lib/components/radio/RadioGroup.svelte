@@ -43,6 +43,7 @@
 	const name = $derived(nameProp ?? `db-radio-${own}`);
 	const hintId = `db-radio-${own}-hint`;
 	const errorId = `db-radio-${own}-error`;
+	const legendId = `db-radio-${own}-legend`;
 	const describedBy = $derived(
 		[error ? errorId : null, hint ? hintId : null].filter(Boolean).join(' ') || undefined
 	);
@@ -78,14 +79,15 @@
 	data-invalid={error ? true : undefined}
 >
 	{#if label}
-		<legend class="db-radio-group__legend">
+		<legend class="db-radio-group__legend" id={legendId}>
 			{label}{#if required}<span class="db-radio-group__required" aria-hidden="true">*</span>{/if}
 		</legend>
 	{/if}
 	<div
 		class="db-radio-group__items"
 		role="radiogroup"
-		aria-label={label}
+		aria-labelledby={label ? legendId : undefined}
+		aria-label={label ? undefined : rest['aria-label']}
 		aria-required={required || undefined}
 		aria-invalid={error ? true : undefined}
 		aria-describedby={describedBy}

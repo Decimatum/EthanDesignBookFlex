@@ -31,4 +31,23 @@ describe('Field', () => {
 		expect(el).toBeRequired();
 		expect(screen.container.querySelector('.db-field__required')).not.toBeNull();
 	});
+
+	it('wires a Checkbox to the Field label, hint and required', async () => {
+		const screen = render(Fixture, { control: 'checkbox', hint: 'Weekly', required: true });
+		const box = screen.container.querySelector('input') as HTMLInputElement;
+		const fieldLabel = screen.container.querySelector('.db-field__label') as HTMLLabelElement;
+		expect(fieldLabel.htmlFor).toBe(box.id);
+		expect(box).toBeRequired();
+		await expect.element(screen.getByRole('checkbox')).toHaveAccessibleDescription('Weekly');
+	});
+
+	it('as a fieldset, keeps ids unique and describes the group once', () => {
+		const screen = render(Fixture, { control: 'fieldset', hint: 'Pick any' });
+		const [a, b] = Array.from(screen.container.querySelectorAll('input'));
+		expect(a.id).not.toBe(b.id);
+		expect(a.hasAttribute('aria-describedby')).toBe(false);
+		const fieldset = screen.container.querySelector('fieldset') as HTMLElement;
+		expect(fieldset.getAttribute('aria-describedby')).toBeTruthy();
+		expect(screen.container.querySelector('legend')?.textContent).toContain('Alerts');
+	});
 });

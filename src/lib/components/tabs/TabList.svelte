@@ -41,6 +41,8 @@
 	:global(.db-tab-list[data-orientation='vertical']) {
 		flex-direction: column;
 		overflow: visible;
+		/* A vertical list narrower than its labels + breathing room reads as cramped. */
+		min-width: 9rem;
 	}
 	:global(.db-tab-list[data-variant='underline']) {
 		gap: var(--space-4);

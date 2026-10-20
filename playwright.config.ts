@@ -14,7 +14,9 @@ export default defineConfig({
 	reporter: process.env.CI ? 'github' : 'list',
 	snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}{ext}',
 	expect: {
-		toHaveScreenshot: { maxDiffPixelRatio: 0.002, animations: 'disabled' }
+		// Captures are deterministic on the pinned Chromium; 20 px absorbs sub-pixel flicker but
+		// cannot hide a changed glyph or border (the old 0.2% ratio let ~2,000 px slip through).
+		toHaveScreenshot: { maxDiffPixels: 20, animations: 'disabled' }
 	},
 	use: {
 		baseURL: 'http://localhost:4173',
@@ -24,7 +26,8 @@ export default defineConfig({
 		launchOptions: { executablePath: process.env.PW_CHROMIUM_PATH || undefined }
 	},
 	webServer: {
-		command: 'npm run build && npm run preview',
+		// Docs site only: e2e never needs svelte-package/publint, which `npm run build` also runs.
+		command: 'npm run build:docs && npm run preview',
 		port: 4173,
 		reuseExistingServer: !process.env.CI
 	},

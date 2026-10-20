@@ -30,7 +30,8 @@
 				'accent-active',
 				'accent-subtle',
 				'accent-border',
-				'accent-text'
+				'accent-text',
+				'knob'
 			]
 		},
 		{

@@ -51,8 +51,12 @@
 		// Width, font and density changes all alter the wrapped line count; re-measure for each.
 		const ro = new ResizeObserver(() => fit(node));
 		ro.observe(node);
-		document.fonts?.ready.then(() => fit(node));
-		return () => ro.disconnect();
+		let alive = true;
+		document.fonts?.ready.then(() => alive && fit(node));
+		return () => {
+			alive = false;
+			ro.disconnect();
+		};
 	});
 </script>
 

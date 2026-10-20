@@ -1,12 +1,97 @@
 <script lang="ts">
 	import '$lib/styles/fonts.css';
 	import '$lib/styles/index.css';
-	import { page } from '$app/state';
+	import { page, navigating } from '$app/state';
+	import { onNavigate } from '$app/navigation';
 	import { nav } from '$docs/nav.js';
 	import ThemeSwitcher from '$docs/ThemeSwitcher.svelte';
-	import { Toaster } from '$lib/index.js';
+	import {
+		AppShell,
+		Nav,
+		NavSection,
+		NavItem,
+		Kbd,
+		Button,
+		CommandPalette,
+		Toaster,
+		RouteProgress,
+		viewTransition,
+		slideByDepth
+	} from '$lib/index.js';
+	import {
+		Palette,
+		Type,
+		Ruler,
+		Sparkles,
+		Layers,
+		PanelsTopLeft,
+		Command,
+		ArrowRightLeft,
+		Loader,
+		ListChecks,
+		LayoutDashboard,
+		Route,
+		Search,
+		LockKeyhole,
+		ShoppingCart,
+		SlidersHorizontal
+	} from '@lucide/svelte';
+	import { theme } from '$lib/theme/theme.svelte.js';
 
 	let { children } = $props();
+
+	// The docs site is the biggest demo: real route progress and view transitions.
+	onNavigate(viewTransition({ pick: slideByDepth }));
+
+	// Icons for the foundations and flow pages; components fall back to a monogram in the rail.
+	const icons: Record<string, typeof Palette> = {
+		'/foundations/colors/': Palette,
+		'/foundations/typography/': Type,
+		'/foundations/spacing/': Ruler,
+		'/foundations/motion/': Sparkles,
+		'/flow/app-shell/': PanelsTopLeft,
+		'/flow/command-palette/': Command,
+		'/flow/page-transition/': ArrowRightLeft,
+		'/flow/route-progress/': Loader,
+		'/flow/stepper/': ListChecks,
+		'/patterns/auth/': LockKeyhole,
+		'/patterns/checkout/': ShoppingCart,
+		'/patterns/dashboard/': LayoutDashboard,
+		'/patterns/onboarding/': Route,
+		'/patterns/settings/': SlidersHorizontal
+	};
+	let collapsed = $state(false);
+	let paletteOpen = $state(false);
+
+	// Every docs page plus the theme axes, reachable from ⌘K.
+	const commands = [
+		...nav.map((section) => ({
+			heading: section.title,
+			commands: section.items.map((item) => ({ id: item.href, label: item.title, href: item.href }))
+		})),
+		{
+			heading: 'Theme',
+			commands: [
+				{
+					id: 'scheme',
+					label: 'Toggle light / dark',
+					shortcut: 'mod+shift+l',
+					onSelect: () => theme.toggleScheme()
+				},
+				...(['slate', 'folio', 'terminal'] as const).map((t) => ({
+					id: `theme-${t}`,
+					label: `Use ${t} theme`,
+					onSelect: () => theme.set({ theme: t })
+				})),
+				{
+					id: 'density',
+					label: 'Toggle density',
+					onSelect: () =>
+						theme.set({ density: theme.current.density === 'compact' ? 'comfortable' : 'compact' })
+				}
+			]
+		}
+	];
 </script>
 
 <svelte:head>
@@ -14,39 +99,63 @@
 </svelte:head>
 
 <a class="skip-link" href="#main">Skip to content</a>
+<RouteProgress active={navigating.to !== null} />
 
-<div class="shell">
-	<header class="header">
-		<a class="brand" href="/">Design Book</a>
+<AppShell
+	bind:collapsed
+	sidebarLabel="Docs"
+	sidebarWidth="15.5rem"
+	contentWidth="var(--container-lg)"
+>
+	{#snippet brand({ collapsed })}
+		<a href="/" class="brand" aria-label="Design Book home">
+			<span class="brand__mark" aria-hidden="true"><Layers /></span>
+			{#if !collapsed}<span class="brand__name">Design Book</span>{/if}
+		</a>
+	{/snippet}
+	{#snippet header()}
+		<Button variant="outline" tone="neutral" size="sm" onclick={() => (paletteOpen = true)}>
+			{#snippet leading()}<Search />{/snippet}
+			Search
+		</Button>
 		<ThemeSwitcher />
-	</header>
-
-	<nav class="sidebar" aria-label="Docs">
-		{#each nav as section (section.title)}
-			<div class="sidebar__section">
-				<div class="sidebar__heading">{section.title}</div>
-				<ul role="list">
+	{/snippet}
+	{#snippet sidebar({ close })}
+		<Nav current={page.url.pathname}>
+			{#each nav as section (section.title)}
+				<NavSection title={section.title}>
 					{#each section.items as item (item.href)}
-						<li>
-							<a
-								class="sidebar__link"
-								href={item.href}
-								aria-current={page.url.pathname === item.href ? 'page' : undefined}
-							>
+						{@const Icon = icons[item.href]}
+						{#if Icon}
+							<NavItem href={item.href} exact onclick={close}>
+								{#snippet icon()}<Icon />{/snippet}
 								{item.title}
-							</a>
-						</li>
+							</NavItem>
+						{:else}
+							<NavItem href={item.href} exact onclick={close}>{item.title}</NavItem>
+						{/if}
 					{/each}
-				</ul>
-			</div>
-		{/each}
-	</nav>
-
-	<main class="main" id="main" tabindex="-1">
+				</NavSection>
+			{/each}
+		</Nav>
+	{/snippet}
+	{#snippet sidebarFooter({ collapsed })}
+		{#if !collapsed}
+			<button type="button" class="sidebar-hint" onclick={() => (paletteOpen = true)}>
+				<Kbd keys="mod+k" size="sm" /> Jump to…
+			</button>
+		{/if}
+	{/snippet}
+	<div class="page">
 		{@render children()}
-	</main>
-</div>
+	</div>
+</AppShell>
 
+<CommandPalette
+	bind:open={paletteOpen}
+	groups={commands}
+	placeholder="Jump to a page or change the theme…"
+/>
 <Toaster />
 
 <style>
@@ -67,136 +176,97 @@
 	.skip-link:focus-visible {
 		transform: none;
 	}
-	.main:focus-visible {
-		box-shadow: none;
-	}
-	.shell {
-		display: grid;
-		grid-template-columns: 15rem 1fr;
-		grid-template-rows: auto 1fr;
-		grid-template-areas:
-			'header header'
-			'sidebar main';
-		min-height: 100dvh;
-	}
-	.header {
-		grid-area: header;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: var(--space-4);
-		flex-wrap: wrap;
-		padding: var(--space-3) var(--space-6);
-		border-bottom: 1px solid var(--color-border);
-		background: var(--color-surface);
-		position: sticky;
-		top: 0;
-		z-index: var(--z-sticky);
-	}
 	.brand {
-		font-family: var(--font-display);
-		font-variation-settings: var(--font-display-variation);
-		font-weight: var(--font-display-weight);
-		font-size: var(--text-lg);
-		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-2-5);
+		min-width: 0;
+		border-radius: var(--radius-md);
 	}
-	.sidebar {
-		grid-area: sidebar;
-		padding: var(--space-6) var(--space-4);
-		border-right: 1px solid var(--color-border);
-		background: var(--color-bg-subtle);
+	.brand:focus-visible {
+		outline: none;
+		box-shadow: var(--focus-ring);
 	}
-	.sidebar__section + .sidebar__section {
-		margin-block-start: var(--space-6);
+	.brand__mark {
+		display: inline-grid;
+		place-items: center;
+		flex: none;
+		width: 1.75rem;
+		height: 1.75rem;
+		border-radius: var(--radius-md);
+		background: var(--color-accent);
+		color: var(--color-accent-fg);
+		box-shadow: var(--shadow-xs);
 	}
-	.sidebar__heading {
+	.brand__mark :global(svg) {
+		width: 1rem;
+		height: 1rem;
+	}
+	.brand__name {
+		white-space: nowrap;
+	}
+	.sidebar-hint {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-1-5);
+		height: var(--control-h-sm);
+		padding-inline: var(--space-1-5);
+		border-radius: var(--shell-nav-radius);
 		font-size: var(--text-xs);
-		font-weight: var(--weight-semibold);
-		letter-spacing: var(--tracking-wide);
-		text-transform: uppercase;
-		color: var(--color-text-subtle);
-		margin-block-end: var(--space-2);
-		padding-inline: var(--space-2);
-	}
-	.sidebar__link {
-		display: block;
-		padding: var(--space-1-5) var(--space-2);
-		border-radius: var(--radius-sm);
-		font-size: var(--text-sm);
 		color: var(--color-text-muted);
-		text-decoration: none;
+		white-space: nowrap;
+		cursor: pointer;
 		transition: var(--transition-colors);
 	}
-	.sidebar__link:hover {
-		background: var(--color-component);
+	.sidebar-hint:hover {
 		color: var(--color-text);
+		background: var(--shell-nav-hover-bg);
 	}
-	.sidebar__link[aria-current='page'] {
-		background: var(--color-accent-subtle);
-		color: var(--color-accent-text);
-		font-weight: var(--weight-medium);
+	.sidebar-hint:focus-visible {
+		outline: none;
+		box-shadow: var(--focus-ring);
 	}
-	.main {
-		grid-area: main;
-		padding: var(--space-8) var(--space-8) var(--space-16);
-		max-width: var(--container-lg);
-		width: 100%;
-	}
-	.main :global(h1) {
+
+	/* ---- page prose (the docs pages themselves). Scoped to direct children so components inside
+	   demos (Heading, Text, Table) are never restyled by the docs. ---- */
+	.page > :global(h1) {
 		margin-block-end: var(--space-2);
 	}
-	.main :global(h2) {
+	.page > :global(h2) {
 		margin-block: var(--space-10) var(--space-3);
 		padding-block-end: var(--space-2);
 		border-bottom: 1px solid var(--color-border);
 	}
-	.main :global(p) {
+	.page > :global(p) {
 		max-width: 65ch;
 		color: var(--color-text-muted);
 	}
-	.main :global(p + p) {
+	.page > :global(p + p) {
 		margin-block-start: var(--space-3);
 	}
-	.main :global(.lead) {
+	.page > :global(.lead) {
 		font-size: var(--text-lg);
 	}
-	.main :global(table) {
+	.page > :global(table) {
 		width: 100%;
 		border-collapse: collapse;
 		font-size: var(--text-sm);
 		margin-block: var(--space-4);
 	}
-	.main :global(th),
-	.main :global(td) {
+	.page > :global(table th),
+	.page > :global(table td) {
 		text-align: left;
 		padding: var(--space-2) var(--space-3);
 		border-bottom: 1px solid var(--color-border);
 		vertical-align: top;
 	}
-	.main :global(th) {
+	.page > :global(table th) {
 		color: var(--color-text-muted);
 		font-weight: var(--weight-medium);
 	}
-	.main :global(code) {
+	.page :global(code) {
 		padding: 0.1em 0.35em;
 		border-radius: var(--radius-xs);
 		background: var(--color-component);
-	}
-
-	@media (max-width: 48rem) {
-		.shell {
-			grid-template-columns: 1fr;
-			grid-template-areas:
-				'header'
-				'sidebar'
-				'main';
-		}
-		.sidebar {
-			border-right: none;
-			border-bottom: 1px solid var(--color-border);
-		}
-		.main {
-			padding: var(--space-6) var(--space-4) var(--space-12);
-		}
 	}
 </style>

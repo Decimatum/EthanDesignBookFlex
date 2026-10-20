@@ -39,6 +39,8 @@
 	--color-accent-hover: var(--a-10);
 	--color-accent-active: var(--a-11);
 	--color-accent-fg: var(--a-contrast);
+	/* Thumb of a switch/slider knob: always light, on top of a border or accent track. */
+	--color-knob: var(--white);
 	--color-accent-subtle: var(--a-3);
 	--color-accent-subtle-hover: var(--a-4);
 	--color-accent-subtle-active: var(--a-5);
@@ -112,4 +114,27 @@
 	/* ---- Layout ---- */
 	--page-px: var(--space-6);
 	--page-max: var(--container-xl);
+
+	/* ---- App shell (layered surfaces; themes override to taste) ----
+	   canvas: what sits behind everything; the sidebar lives directly on it.
+	   surface: the rounded content panel floating on the canvas. */
+	--shell-canvas: var(--n-2);
+	--shell-sidebar-bg: transparent;
+	--shell-sidebar-border: transparent;
+	--shell-surface: var(--n-1);
+	--shell-surface-border: var(--n-6);
+	--shell-surface-shadow: var(--shadow-xs);
+	--shell-radius: var(--radius-lg);
+	--shell-gap: var(--space-3);
+	--shell-header-bg: color-mix(in srgb, var(--n-2) 82%, transparent);
+	--shell-header-blur: 12px;
+	--shell-nav-fg: var(--n-11);
+	--shell-nav-hover-bg: color-mix(in srgb, var(--n-12) 6%, transparent);
+	--shell-nav-active-bg: var(--a-3);
+	--shell-nav-active-fg: var(--a-11);
+	--shell-nav-indicator: var(--a-9);
+	--shell-nav-indicator-w: 3px;
+	--shell-nav-underline-h: 2px;
+	--shell-nav-active-bg-h: transparent;
+	--shell-nav-radius: var(--radius-md);
 }

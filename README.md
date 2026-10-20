@@ -17,16 +17,18 @@ npx playwright install chromium   # once, for browser tests
 npm run dev                       # docs site
 ```
 
-| Command                   | What it does                                    |
-| ------------------------- | ----------------------------------------------- |
-| `npm run check`           | svelte-check                                    |
-| `npm run lint`            | prettier + eslint                               |
-| `npm run test:unit`       | Vitest (browser mode)                           |
-| `npm run test:a11y`       | axe across every docs page, theme and scheme    |
-| `npm run test:visual`     | screenshot regression (`:update` to rebaseline) |
-| `npm run new:component x` | scaffold a component folder + docs page         |
-| `npm run gen:docs`        | regenerate `llms.txt` and `registry.json`       |
-| `npm run build`           | docs site + package build + publint             |
+| Command                   | What it does                                      |
+| ------------------------- | ------------------------------------------------- |
+| `npm run check`           | svelte-check                                      |
+| `npm run lint`            | prettier + eslint                                 |
+| `npm run test:unit`       | Vitest (browser mode)                             |
+| `npm run test:changed`    | a11y + visual only for routes your changes affect |
+| `npm run test:a11y`       | axe across every docs page, theme and scheme      |
+| `npm run test:visual`     | screenshot regression (`:update` to rebaseline)   |
+| `npm run shots:optimize`  | lossless shrink of the screenshot baselines       |
+| `npm run new:component x` | scaffold a component folder + docs page           |
+| `npm run gen:docs`        | regenerate `llms.txt` and `registry.json`         |
+| `npm run build`           | docs site + package build + publint               |
 
 ## Use in a project
 
@@ -53,4 +55,19 @@ npm install @ethan/designbook
 Copy the inline script from `src/app.html` into your own `app.html` to restore the visitor's
 theme before first paint.
 
-See `PLAN.md` for the roadmap and `CLAUDE.md` for conventions.
+The package is not on npm: `npm run pack:local` writes a versioned tarball to `releases/`, and the
+app installs that. Full guide — install methods, the `public` / `app` profiles, one codebase with
+both, and what to do when a component is missing — in **`USING.md`**.
+
+## Use from a Claude Code project
+
+```sh
+npm run skill:install     # once per machine: symlinks claude-code/skills/designbook into ~/.claude/skills
+```
+
+Then in the app: paste `claude-code/CLAUDE.snippet.md` into its `CLAUDE.md` (fill in the profile)
+and `claude-code/settings.snippet.json` into `.claude/settings.json` so the session can read the
+Book's READMEs and append to `REQUESTS.md`. Missing components are requested there and built here,
+never in the app.
+
+See `STATUS.md` for where things stand, `PLAN.md` for the roadmap and `CLAUDE.md` for conventions.

@@ -46,7 +46,7 @@ All other props are forwarded to the root element.
 
 ## Context
 
-`getFieldContext()` returns `{ id, describedBy, invalid, required, disabled }` (all reactive getters). Input, Textarea, Checkbox, Switch and Radio read it automatically; a custom control can do the same.
+`getFieldContext()` returns `{ id, labelId, describedBy, invalid, required, disabled }` (all reactive getters). Input, Textarea, Select, Checkbox, Switch and Slider read it automatically; a custom control can do the same. Inside `as="fieldset"`, `id` and `describedBy` are `undefined` — the fieldset itself carries the description and each control keeps its own id, so groups of checkboxes never collide. `labelId` lets non-labelable controls (Slider thumbs) use `aria-labelledby`.
 
 ## Keyboard
 

@@ -42,6 +42,18 @@ describe('Input', () => {
 		expect(root.querySelectorAll('[data-testid="icon"]')).toHaveLength(2);
 	});
 
+	it('exposes an interactive `action` control that is not aria-hidden', async () => {
+		const action = createRawSnippet(() => ({
+			render: () => '<button type="button" aria-label="Clear">×</button>'
+		}));
+		const screen = render(Input, { 'aria-label': 'Search', value: 'x', action });
+		const button = screen.getByRole('button', { name: 'Clear' });
+		await expect.element(button).toBeVisible();
+		// Adornments are decorative and hidden; the action must stay in the accessibility tree.
+		const hiddenAncestor = (button.element() as HTMLElement).closest('[aria-hidden="true"]');
+		expect(hiddenAncestor).toBeNull();
+	});
+
 	it('forwards native attributes', () => {
 		const screen = render(Input, { 'aria-label': 'Email', type: 'email', placeholder: 'x@y.z' });
 		const input = screen.container.querySelector('input') as HTMLInputElement;

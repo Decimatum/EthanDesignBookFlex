@@ -1,0 +1,54 @@
+/*
+ * View Transitions API animations, keyed by `data-transition` on <html>, which
+ * `viewTransition()` (flow/page-transition) sets for the duration of a navigation.
+ * Durations come from the motion tokens, so reduced motion zeroes them too.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: var(--duration-slow);
+	animation-timing-function: var(--ease-standard);
+}
+
+html[data-transition='fade']::view-transition-old(root) {
+	animation-name: db-vt-fade-out;
+}
+html[data-transition='fade']::view-transition-new(root) {
+	animation-name: db-vt-fade-in;
+}
+
+html[data-transition='slide']::view-transition-old(root) {
+	animation-name: db-vt-fade-out, db-vt-slide-out;
+}
+html[data-transition='slide']::view-transition-new(root) {
+	animation-name: db-vt-fade-in, db-vt-slide-in;
+	animation-timing-function: var(--ease-decelerate);
+}
+
+@keyframes db-vt-fade-in {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes db-vt-fade-out {
+	to {
+		opacity: 0;
+	}
+}
+@keyframes db-vt-slide-in {
+	from {
+		transform: translateX(24px);
+	}
+}
+@keyframes db-vt-slide-out {
+	to {
+		transform: translateX(-24px);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}

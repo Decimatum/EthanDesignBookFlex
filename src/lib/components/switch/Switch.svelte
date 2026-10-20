@@ -22,6 +22,7 @@
 		labelPosition = 'end',
 		description,
 		disabled,
+		required,
 		id: idProp,
 		children,
 		class: className,
@@ -30,8 +31,9 @@
 
 	const field = getFieldContext();
 	const own = $props.id();
-	const id = $derived(idProp ?? `db-switch-${own}`);
+	const id = $derived(idProp ?? field?.id ?? `db-switch-${own}`);
 	const isDisabled = $derived(disabled ?? field?.disabled ?? false);
+	const isRequired = $derived(required ?? field?.required ?? false);
 </script>
 
 <label
@@ -49,6 +51,7 @@
 		class="db-switch__control sr-only"
 		bind:checked
 		disabled={isDisabled}
+		required={isRequired}
 		aria-describedby={rest['aria-describedby'] ?? field?.describedBy}
 	/>
 	<span class="db-switch__track" aria-hidden="true">
@@ -107,7 +110,7 @@
 		width: calc(var(--_h) - var(--_pad) * 2);
 		height: calc(var(--_h) - var(--_pad) * 2);
 		border-radius: var(--radius-full);
-		background: var(--white);
+		background: var(--color-knob);
 		box-shadow: var(--shadow-sm);
 		transition: transform var(--duration-base) var(--ease-spring);
 	}

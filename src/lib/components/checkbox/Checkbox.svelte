@@ -25,6 +25,7 @@
 		size = 'md',
 		invalid,
 		disabled,
+		required,
 		description,
 		id: idProp,
 		children,
@@ -34,9 +35,10 @@
 
 	const field = getFieldContext();
 	const own = $props.id();
-	const id = $derived(idProp ?? `db-checkbox-${own}`);
+	const id = $derived(idProp ?? field?.id ?? `db-checkbox-${own}`);
 	const isInvalid = $derived(invalid ?? field?.invalid ?? false);
 	const isDisabled = $derived(disabled ?? field?.disabled ?? false);
+	const isRequired = $derived(required ?? field?.required ?? false);
 
 	let el = $state<HTMLInputElement | null>(null);
 	// Clicking a mixed checkbox clears the native flag; re-assert the prop's value whenever
@@ -62,6 +64,7 @@
 		class="db-checkbox__control sr-only"
 		bind:checked
 		disabled={isDisabled}
+		required={isRequired}
 		aria-invalid={isInvalid || undefined}
 		aria-checked={indeterminate ? 'mixed' : undefined}
 		aria-describedby={rest['aria-describedby'] ?? field?.describedBy}

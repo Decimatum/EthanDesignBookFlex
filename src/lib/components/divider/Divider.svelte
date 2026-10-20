@@ -64,8 +64,8 @@
 		height: auto;
 		gap: var(--space-3);
 	}
-	.db-divider[data-labelled]::before,
-	.db-divider[data-labelled]::after {
+	.db-divider[data-orientation='horizontal'][data-labelled]::before,
+	.db-divider[data-orientation='horizontal'][data-labelled]::after {
 		content: '';
 		flex: 1;
 		height: 1px;

@@ -22,14 +22,14 @@ describe('Toast', () => {
 	it('shows a toast with tone, description and a live-region announcement', async () => {
 		const screen = render(Toaster);
 		toast.success('Order filled', { description: '100 AAPL @ 189.20' });
-		const el = screen.getByRole('status').first();
+		const el = screen.getByText('Order filled', { exact: true }).first();
 		await expect.element(el).toBeVisible();
-		await expect.element(el).toHaveTextContent('Order filled');
-		await expect.element(el).toHaveTextContent('100 AAPL @ 189.20');
-		expect(screen.container.querySelector('.db-toast')).toHaveAttribute('data-tone', 'success');
-		expect(screen.container.querySelector('[aria-live="polite"]')?.textContent).toContain(
-			'Order filled'
-		);
+		const card = screen.container.querySelector('.db-toast') as HTMLElement;
+		expect(card).toHaveAttribute('data-tone', 'success');
+		expect(card.textContent).toContain('100 AAPL @ 189.20');
+		// announced once, by the polite live region — the card itself is not a live region
+		expect(card.hasAttribute('role')).toBe(false);
+		await expect.element(screen.getByRole('status')).toHaveTextContent('Order filled');
 	});
 
 	it('dismisses via the close button and the action', async () => {
@@ -50,7 +50,7 @@ describe('Toast', () => {
 		const id = toast('Saving…', { duration: 0, dismissible: false });
 		toast.success('Saved', { id, duration: 200 });
 		await expect.poll(() => screen.container.querySelectorAll('.db-toast').length).toBe(1);
-		await expect.element(screen.getByRole('status').first()).toHaveTextContent('Saved');
+		await expect.element(screen.getByRole('status')).toHaveTextContent('Saved');
 		await expect
 			.poll(() => screen.container.querySelectorAll('.db-toast').length, {
 				timeout: 2000
@@ -62,6 +62,7 @@ describe('Toast', () => {
 		const screen = render(Toaster);
 		toast.danger('Failed', { duration: 0 });
 		await expect.element(screen.getByRole('alert')).toHaveTextContent('Failed');
+		await expect.element(screen.getByRole('status')).not.toHaveTextContent('Failed');
 	});
 
 	it('tracks a promise from loading to success', async () => {
@@ -72,8 +73,8 @@ describe('Toast', () => {
 			success: (v) => `Done: ${v}`,
 			error: 'Nope'
 		});
-		await expect.element(screen.getByRole('status').first()).toHaveTextContent('Working…');
+		await expect.element(screen.getByRole('status')).toHaveTextContent('Working…');
 		await p;
-		await expect.element(screen.getByRole('status').first()).toHaveTextContent('Done: ok');
+		await expect.element(screen.getByRole('status')).toHaveTextContent('Done: ok');
 	});
 });

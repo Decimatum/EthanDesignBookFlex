@@ -36,6 +36,16 @@
 	}: CardProps = $props();
 
 	const tag = $derived(href ? 'a' : as);
+	// An interactive card without an href is a button: make it reachable and activatable by keyboard.
+	const asButton = $derived(interactive && !href);
+	function onkeydown(e: KeyboardEvent & { currentTarget: HTMLElement }) {
+		rest.onkeydown?.(e as never);
+		if (e.defaultPrevented || e.target !== e.currentTarget) return;
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			e.currentTarget.click();
+		}
+	}
 </script>
 
 <svelte:element
@@ -46,6 +56,9 @@
 	data-variant={variant}
 	data-padding={padding}
 	data-interactive={interactive || href ? true : undefined}
+	role={asButton ? (rest.role ?? 'button') : rest.role}
+	tabindex={asButton ? (rest.tabindex ?? 0) : rest.tabindex}
+	onkeydown={asButton ? onkeydown : rest.onkeydown}
 >
 	{#if header}<div class="db-card__header">{@render header()}</div>{/if}
 	{#if children}<div class="db-card__body">{@render children()}</div>{/if}
