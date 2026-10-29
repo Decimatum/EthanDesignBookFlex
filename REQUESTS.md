@@ -116,7 +116,7 @@ Entry format:
 - Shape: `<TabBar items={[{ href, label, icon, badge? }]} current>` fixed to the bottom on
   narrow viewports (safe-area aware), hidden at ≥ 64rem where the sidebar takes over; an
   AppShell snippet `tabBar` would place it. Dependency-free.
-- Status: shipped 0.3.0 (2026-10-20)
+- Status: shipped 0.3.0 (2026-10-20); fixes in 0.3.1 (2026-10-29)
 
 ### TimeGrid
 

@@ -63,6 +63,7 @@
 		onCreate,
 		event: eventSnippet,
 		class: className,
+		style,
 		...rest
 	}: TimeGridProps = $props();
 
@@ -179,7 +180,9 @@
 	role="grid"
 	aria-label={label}
 	data-cols={days.length}
-	style="--_hour: {hourHeight}; --_cols: {days.length}; --_n-hours: {hourTo - hourFrom}"
+	style="{style
+		? `${style};`
+		: ''} --_hour: {hourHeight}; --_cols: {days.length}; --_n-hours: {hourTo - hourFrom}"
 >
 	<div class="db-time-grid__head" role="row">
 		<div class="db-time-grid__corner" role="columnheader" aria-hidden="true"></div>
@@ -433,7 +436,6 @@
 	}
 	.db-time-grid__event-time {
 		font-size: var(--text-xs);
-		opacity: 0.85;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;

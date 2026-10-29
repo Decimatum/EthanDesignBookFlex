@@ -57,28 +57,27 @@
 	data-always={always || undefined}
 >
 	<ul class="db-tab-bar__list">
-		{#each items as item (item.href)}
+		{#each items as item, i (i)}
 			{@const active = isActive(item)}
+			{@const hasBadge = item.badge !== undefined && item.badge !== ''}
 			<li class="db-tab-bar__item">
 				<a
 					class="db-tab-bar__link"
 					href={item.href}
 					aria-current={active ? 'page' : undefined}
+					aria-label={hasBadge ? `${item.label}, ${item.badge}` : undefined}
 					data-active={active || undefined}
 					onclick={item.onclick}
 				>
 					<span class="db-tab-bar__icon" aria-hidden="true">
 						{#if item.icon}{@render item.icon()}{:else}{item.label.slice(0, 1)}{/if}
-						{#if item.badge !== undefined && item.badge !== ''}
+						{#if hasBadge}
 							<span class="db-tab-bar__badge" data-tone={item.badgeTone ?? 'neutral'}
 								>{item.badge}</span
 							>
 						{/if}
 					</span>
 					<span class="db-tab-bar__label">{item.label}</span>
-					{#if item.badge !== undefined && item.badge !== ''}<span class="db-sr-only"
-							>, {item.badge}</span
-						>{/if}
 				</a>
 			</li>
 		{/each}
@@ -181,13 +180,5 @@
 	.db-tab-bar__badge[data-tone='danger'] {
 		background: var(--color-danger);
 		color: var(--color-danger-fg);
-	}
-	.db-sr-only {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip: rect(0 0 0 0);
-		white-space: nowrap;
 	}
 </style>

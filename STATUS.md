@@ -4,7 +4,8 @@ One page, kept current. Read this (not `HISTORY.md`) at the start of a session. 
 numbers and "Next" when you finish; append the story to `HISTORY.md` only if it would help a
 later session understand a decision.
 
-**Last updated:** 2026-10-20 — **TabBar** (flow) shipped as 0.3.0 for Legwork with an `AppShell` `tabBar` snippet; same caveat: browser suites not yet run here. 2026-10-19 (late) — **TimeGrid** shipped as 0.2.0 for Legwork (week/day hours × blocks; lanes for overlaps; now line; tap-to-create; README, docs page, spec; `check`/`lint`/`build:docs`/`gen:docs` clean from the linked shell — **unit spec, axe and visual baselines still to run on a machine with Chromium**). Earlier same day — consumer kit: `USING.md`, `REQUESTS.md`, `claude-code/` skill + snippets,
+**Last updated:** 2026-10-29 — **0.3.1**: TimeGrid and TabBar went through the browser suites in the cloud workspace (Chromium there; `PW_CHROMIUM_PATH=/opt/pw-browsers/chromium`): 7 unit tests, 12/12 axe, 12 visual baselines (not oxipng-optimised — run `npm run shots:optimize` on the Mac when convenient). Bugs found by the suites and fixed: TimeGrid dropped the caller's `style` (so `height: 100%` never applied and the grid overflowed its box), event-time opacity failed AA on warning blocks; TabBar badge was outside the link's accessible name, items keyed by `href` crashed on duplicates. Specs that pass a prop named `events` must use `render(C, { props })` (vitest-browser-svelte treats `events` as a mount option).
+2026-10-20 — **TabBar** (flow) shipped as 0.3.0 for Legwork with an `AppShell` `tabBar` snippet. 2026-10-19 — **TimeGrid** shipped as 0.2.0 for Legwork. Earlier same day — consumer kit: `USING.md`, `REQUESTS.md`, `claude-code/` skill + snippets,
 `pack:local` / `skill:install` scripts; `public`/`app` profiles defined; Phase 8 (public surface) planned.
 
 ## Where things stand

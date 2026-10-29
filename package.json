@@ -1,6 +1,6 @@
 {
 	"name": "@ethan/designbook",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Design Book — a themeable Svelte 5 UI framework and component library.",
 	"license": "MIT",
 	"scripts": {

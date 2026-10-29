@@ -33,6 +33,7 @@
 	<div class="dock">
 		<TabBar
 			always
+			label="App sections"
 			style="position: static"
 			items={[
 				{
@@ -87,6 +88,7 @@
 	<div class="dock">
 		<TabBar
 			always
+			label="Steps"
 			current="#b"
 			style="position: static"
 			items={[
